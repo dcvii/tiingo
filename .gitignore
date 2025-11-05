@@ -1,0 +1,4 @@
+.envrc
+data/*
+*.duckdb
+*.wal
