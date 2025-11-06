@@ -10,13 +10,16 @@ import (
 	"strings"
 	"time"
 
+	"github.com/mdcb/tiingo-tracker/internal/database"
 	"github.com/mdcb/tiingo-tracker/internal/portfolio"
 	"github.com/mdcb/tiingo-tracker/internal/tiingo"
+	"github.com/mdcb/tiingo-tracker/pkg/models"
 )
 
 func main() {
 	// Parse command-line flags
-	portfolioPath := flag.String("portfolio", "portfolio.txt", "Path to portfolio file")
+	portfolioPath := flag.String("portfolio", "data/portfolio.txt", "Path to portfolio file")
+	dbPath := flag.String("db", "portfolio.duckdb", "Path to DuckDB database file")
 	verbose := flag.Bool("verbose", false, "Enable verbose logging")
 	flag.Parse()
 
@@ -28,10 +31,24 @@ func main() {
 
 	// Initialize logger
 	logger := log.New(os.Stdout, "", log.LstdFlags)
+	logger.Println("Starting Tiingo Portfolio Sync")
 	if *verbose {
-		logger.Println("Starting Tiingo API test")
 		logger.Printf("Portfolio file: %s\n", *portfolioPath)
+		logger.Printf("Database: %s\n", *dbPath)
 	}
+
+	// Initialize database
+	db, err := database.NewManager(*dbPath)
+	if err != nil {
+		log.Fatalf("Error opening database: %v", err)
+	}
+	defer db.Close()
+
+	// Initialize schema
+	if err := db.InitSchema(); err != nil {
+		log.Fatalf("Error initializing schema: %v", err)
+	}
+	logger.Println("✅ Database initialized")
 
 	// Read portfolio
 	reader := portfolio.NewReader()
@@ -53,31 +70,40 @@ func main() {
 	for i, ticker := range tickers {
 		logger.Printf("\n[%d/%d] Processing %s...\n", i+1, len(tickers), ticker)
 		
-		// Convert ticker format for API (e.g., BRK/B -> BRK.B)
+		// Convert ticker format for API (e.g., BRK/B -> brk-b)
 		apiTicker := convertTickerFormat(ticker)
 
 		// Try to detect if it's a crypto ticker
 		isCrypto := ticker == "BTC" || ticker == "ETH" || ticker == "BTCUSD"
 
+		var syncErr error
 		if isCrypto {
 			// Handle cryptocurrency
-			if err := processCrypto(ctx, client, ticker, logger, *verbose); err != nil {
-				logger.Printf("❌ Error processing crypto %s: %v\n", ticker, err)
-				continue
-			}
+			syncErr = processCrypto(ctx, client, db, ticker, logger, *verbose)
 		} else {
 			// Handle stock
-			if err := processStock(ctx, client, apiTicker, logger, *verbose); err != nil {
-				logger.Printf("❌ Error processing stock %s: %v\n", ticker, err)
-				continue
-			}
+			syncErr = processStock(ctx, client, db, apiTicker, logger, *verbose)
+		}
+
+		// Log sync event
+		if syncErr != nil {
+			logger.Printf("❌ Error: %v\n", syncErr)
+			_ = db.LogSyncEvent(ctx, &models.SyncEvent{
+				Ticker:          apiTicker,
+				SyncDate:        time.Now(),
+				RecordsInserted: 0,
+				Status:          "ERROR",
+				ErrorMessage:    syncErr.Error(),
+			})
 		}
 	}
 
-	logger.Println("\n✅ Test complete!")
+	// Display summary
+	totalTickers, _ := db.GetTickerCount(ctx)
+	logger.Printf("\n✅ Sync complete! Total tickers in database: %d\n", totalTickers)
 }
 
-func processStock(ctx context.Context, client *tiingo.Client, ticker string, logger *log.Logger, verbose bool) error {
+func processStock(ctx context.Context, client *tiingo.Client, db *database.Manager, ticker string, logger *log.Logger, verbose bool) error {
 	// Fetch metadata
 	metadata, err := client.GetTickerMetadata(ctx, ticker)
 	if err != nil {
@@ -88,14 +114,38 @@ func processStock(ctx context.Context, client *tiingo.Client, ticker string, log
 	logger.Printf("  Exchange: %s\n", metadata.Exchange)
 	logger.Printf("  Type: %s\n", metadata.AssetType)
 
+	// Save metadata to database
+	tickerRecord := &models.TickerRecord{
+		Ticker:      ticker,
+		Name:        metadata.Name,
+		Exchange:    metadata.Exchange,
+		AssetType:   metadata.AssetType,
+		StartDate:   metadata.StartDate.Time,
+		EndDate:     metadata.EndDate.Time,
+		LastUpdated: time.Now(),
+	}
+	if err := db.UpsertTickerMetadata(ctx, tickerRecord); err != nil {
+		return fmt.Errorf("saving ticker metadata: %w", err)
+	}
+
 	if verbose {
 		metadataJSON, _ := json.MarshalIndent(metadata, "  ", "  ")
 		logger.Printf("  Metadata:\n%s\n", string(metadataJSON))
 	}
 
-	// Fetch recent prices (last 5 days)
+	// Check for last sync date
+	lastSync, err := db.GetLastSyncDate(ctx, ticker)
+	if err != nil {
+		return fmt.Errorf("checking last sync: %w", err)
+	}
+
+	// Determine date range
 	endDate := time.Now()
-	startDate := endDate.AddDate(0, 0, -5)
+	startDate := endDate.AddDate(0, 0, -30) // Default: last 30 days
+	if lastSync != nil {
+		startDate = lastSync.AddDate(0, 0, 1) // Start from day after last sync
+		logger.Printf("  Last sync: %s\n", lastSync.Format("2006-01-02"))
+	}
 
 	prices, err := client.GetDailyPrices(ctx, ticker, startDate, endDate)
 	if err != nil {
@@ -103,6 +153,40 @@ func processStock(ctx context.Context, client *tiingo.Client, ticker string, log
 	}
 
 	logger.Printf("  Retrieved %d price records\n", len(prices))
+
+	// Convert and save to database
+	priceRecords := make([]models.PriceRecord, 0, len(prices))
+	for _, p := range prices {
+		priceRecords = append(priceRecords, models.PriceRecord{
+			Ticker:    ticker,
+			Date:      p.Date.Time,
+			Open:      p.Open,
+			High:      p.High,
+			Low:       p.Low,
+			Close:     p.Close,
+			Volume:    p.Volume,
+			AdjClose:  p.AdjClose,
+			AdjVolume: p.AdjVolume,
+		})
+	}
+
+	if err := db.InsertDailyPrices(ctx, priceRecords); err != nil {
+		return fmt.Errorf("saving prices: %w", err)
+	}
+
+	// Log successful sync
+	if err := db.LogSyncEvent(ctx, &models.SyncEvent{
+		Ticker:          ticker,
+		SyncDate:        time.Now(),
+		RecordsInserted: len(priceRecords),
+		Status:          "SUCCESS",
+		ErrorMessage:    "",
+	}); err != nil {
+		logger.Printf("  Warning: failed to log sync event: %v\n", err)
+	}
+
+	totalPrices, _ := db.GetPriceCount(ctx, ticker)
+	logger.Printf("  Saved %d new records (total: %d)\n", len(priceRecords), totalPrices)
 
 	if len(prices) > 0 {
 		latest := prices[len(prices)-1]
@@ -123,7 +207,7 @@ func processStock(ctx context.Context, client *tiingo.Client, ticker string, log
 	return nil
 }
 
-func processCrypto(ctx context.Context, client *tiingo.Client, ticker string, logger *log.Logger, verbose bool) error {
+func processCrypto(ctx context.Context, client *tiingo.Client, db *database.Manager, ticker string, logger *log.Logger, verbose bool) error {
 	// For crypto, use the standard ticker format (e.g., "btcusd")
 	cryptoTicker := ticker + "usd"
 	if ticker == "BTCUSD" || ticker == "ETHUSD" {
