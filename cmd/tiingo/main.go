@@ -7,7 +7,6 @@ import (
 	"fmt"
 	"log"
 	"os"
-	"strings"
 	"time"
 
 	"github.com/mdcb/tiingo-tracker/internal/database"
@@ -69,9 +68,6 @@ func main() {
 	// Process each ticker
 	for i, ticker := range tickers {
 		logger.Printf("\n[%d/%d] Processing %s...\n", i+1, len(tickers), ticker)
-		
-		// Convert ticker format for API (e.g., BRK/B -> brk-b)
-		apiTicker := convertTickerFormat(ticker)
 
 		// Try to detect if it's a crypto ticker
 		isCrypto := ticker == "BTC" || ticker == "ETH" || ticker == "BTCUSD"
@@ -82,14 +78,14 @@ func main() {
 			syncErr = processCrypto(ctx, client, db, ticker, logger, *verbose)
 		} else {
 			// Handle stock
-			syncErr = processStock(ctx, client, db, apiTicker, logger, *verbose)
+syncErr = processStock(ctx, client, db, ticker, logger, *verbose)
 		}
 
 		// Log sync event
 		if syncErr != nil {
 			logger.Printf("❌ Error: %v\n", syncErr)
 			_ = db.LogSyncEvent(ctx, &models.SyncEvent{
-				Ticker:          apiTicker,
+Ticker:          ticker,
 				SyncDate:        time.Now(),
 				RecordsInserted: 0,
 				Status:          "ERROR",
@@ -209,7 +205,7 @@ func processStock(ctx context.Context, client *tiingo.Client, db *database.Manag
 
 func processCrypto(ctx context.Context, client *tiingo.Client, db *database.Manager, ticker string, logger *log.Logger, verbose bool) error {
 	// For crypto, use the standard ticker format (e.g., "btcusd")
-	cryptoTicker := ticker + "usd"
+	cryptoTicker := ticker + "USD"
 	if ticker == "BTCUSD" || ticker == "ETHUSD" {
 		cryptoTicker = ticker
 	}
@@ -245,11 +241,4 @@ func processCrypto(ctx context.Context, client *tiingo.Client, db *database.Mana
 	}
 
 	return nil
-}
-
-// convertTickerFormat converts ticker symbols to Tiingo API format
-// e.g., BRK/B -> brk-b (Tiingo uses lowercase with hyphen for class shares)
-func convertTickerFormat(ticker string) string {
-	formatted := strings.ReplaceAll(ticker, "/", "-")
-	return strings.ToLower(formatted)
 }
