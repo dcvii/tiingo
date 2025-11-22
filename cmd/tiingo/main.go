@@ -7,18 +7,19 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"strings"
 	"time"
 
-	"github.com/mdcb/tiingo-tracker/internal/database"
+	"github.com/mdcb/tiingo-tracker/internal/kafka"
 	"github.com/mdcb/tiingo-tracker/internal/portfolio"
 	"github.com/mdcb/tiingo-tracker/internal/tiingo"
-	"github.com/mdcb/tiingo-tracker/pkg/models"
 )
 
 func main() {
 	// Parse command-line flags
 	portfolioPath := flag.String("portfolio", "data/portfolio.txt", "Path to portfolio file")
-	dbPath := flag.String("db", "portfolio.duckdb", "Path to DuckDB database file")
+	brokers := flag.String("brokers", "localhost:9092", "Comma-separated list of Kafka brokers")
+	topic := flag.String("topic", kafka.TopicDailyPrices, "Kafka topic to publish to")
 	verbose := flag.Bool("verbose", false, "Enable verbose logging")
 	flag.Parse()
 
@@ -30,24 +31,27 @@ func main() {
 
 	// Initialize logger
 	logger := log.New(os.Stdout, "", log.LstdFlags)
-	logger.Println("Starting Tiingo Portfolio Sync")
+	logger.Println("Starting Tiingo API to Kafka Producer")
 	if *verbose {
 		logger.Printf("Portfolio file: %s\n", *portfolioPath)
-		logger.Printf("Database: %s\n", *dbPath)
+		logger.Printf("Brokers: %s\n", *brokers)
+		logger.Printf("Topic: %s\n", *topic)
 	}
 
-	// Initialize database
-	db, err := database.NewManager(*dbPath)
+	// Parse brokers
+	brokerList := strings.Split(*brokers, ",")
+	for i := range brokerList {
+		brokerList[i] = strings.TrimSpace(brokerList[i])
+	}
+
+	// Initialize Kafka producer
+	config := kafka.NewProducerConfig(brokerList, *topic)
+	producer, err := kafka.NewProducer(config)
 	if err != nil {
-		log.Fatalf("Error opening database: %v", err)
+		log.Fatalf("Error creating Kafka producer: %v", err)
 	}
-	defer db.Close()
-
-	// Initialize schema
-	if err := db.InitSchema(); err != nil {
-		log.Fatalf("Error initializing schema: %v", err)
-	}
-	logger.Println("✅ Database initialized")
+	defer producer.Close()
+	logger.Println("✅ Kafka producer initialized")
 
 	// Read portfolio
 	reader := portfolio.NewReader()
@@ -67,6 +71,8 @@ func main() {
 
 	// Process each ticker
 	overallStart := time.Now()
+	successCount := 0
+	errorCount := 0
 	for i, ticker := range tickers {
 		tickerStart := time.Now()
 		logger.Printf("\n[%d/%d] Processing %s...\n", i+1, len(tickers), ticker)
@@ -74,39 +80,41 @@ func main() {
 		// Try to detect if it's a crypto ticker
 		isCrypto := ticker == "BTC" || ticker == "ETH" || ticker == "BTCUSD"
 
-		var syncErr error
+		var publishErr error
 		if isCrypto {
 			// Handle cryptocurrency
-			syncErr = processCrypto(ctx, client, db, ticker, logger, *verbose)
+			publishErr = processCrypto(ctx, client, producer, ticker, logger, *verbose)
 		} else {
 			// Handle stock
-syncErr = processStock(ctx, client, db, ticker, logger, *verbose)
+			publishErr = processStock(ctx, client, producer, ticker, logger, *verbose)
 		}
 
-		// Log sync event
-		if syncErr != nil {
-			logger.Printf("❌ Error: %v\n", syncErr)
-			_ = db.LogSyncEvent(ctx, &models.SyncEvent{
-Ticker:          ticker,
-				SyncDate:        time.Now(),
-				RecordsInserted: 0,
-				Status:          "ERROR",
-				ErrorMessage:    syncErr.Error(),
-			})
+		if publishErr != nil {
+			logger.Printf("❌ Error: %v\n", publishErr)
+			errorCount++
+		} else {
+			successCount++
 		}
 
 		logger.Printf("⏱️  %s processing time: %v\n", ticker, time.Since(tickerStart))
 	}
 
 	// Display summary
-	totalTickers, _ := db.GetTickerCount(ctx)
-	totalRequests := client.GetRequestCount()
-	logger.Printf("\n✅ Sync complete! Total tickers in database: %d\n", totalTickers)
-	logger.Printf("📊 Total API requests made: %d\n", totalRequests)
+	logger.Printf("\n✅ Publishing complete!\n")
+	logger.Printf("  Success: %d\n", successCount)
+	logger.Printf("  Errors: %d\n", errorCount)
 	logger.Printf("⏱️  Total processing time: %v\n", time.Since(overallStart))
+
+	if *verbose {
+		stats := producer.Stats()
+		logger.Printf("\n📊 Producer Statistics:\n")
+		logger.Printf("  Messages: %d\n", stats.Messages)
+		logger.Printf("  Bytes: %d\n", stats.Bytes)
+		logger.Printf("  Errors: %d\n", stats.Errors)
+	}
 }
 
-func processStock(ctx context.Context, client *tiingo.Client, db *database.Manager, ticker string, logger *log.Logger, verbose bool) error {
+func processStock(ctx context.Context, client *tiingo.Client, producer *kafka.Producer, ticker string, logger *log.Logger, verbose bool) error {
 	// Fetch metadata
 	metadataStart := time.Now()
 	metadata, err := client.GetTickerMetadata(ctx, ticker)
@@ -115,48 +123,18 @@ func processStock(ctx context.Context, client *tiingo.Client, db *database.Manag
 		return fmt.Errorf("fetching metadata: %w", err)
 	}
 
-	if err != nil {
-		return fmt.Errorf("fetching metadata: %w", err)
-	}
-
 	logger.Printf("  Name: %s\n", metadata.Name)
 	logger.Printf("  Exchange: %s\n", metadata.Exchange)
 	logger.Printf("  Type: %s\n", metadata.AssetType)
-
-	// Save metadata to database
-	dbStart := time.Now()
-	tickerRecord := &models.TickerRecord{
-		Ticker:      ticker,
-		Name:        metadata.Name,
-		Exchange:    metadata.Exchange,
-		AssetType:   metadata.AssetType,
-		StartDate:   metadata.StartDate.Time,
-		EndDate:     metadata.EndDate.Time,
-		LastUpdated: time.Now(),
-	}
-	if err := db.UpsertTickerMetadata(ctx, tickerRecord); err != nil {
-		return fmt.Errorf("saving ticker metadata: %w", err)
-	}
-	logger.Printf("  ⏱️  Metadata save: %v\n", time.Since(dbStart))
 
 	if verbose {
 		metadataJSON, _ := json.MarshalIndent(metadata, "  ", "  ")
 		logger.Printf("  Metadata:\n%s\n", string(metadataJSON))
 	}
 
-	// Check for last sync date
-	lastSync, err := db.GetLastSyncDate(ctx, ticker)
-	if err != nil {
-		return fmt.Errorf("checking last sync: %w", err)
-	}
-
-	// Determine date range
+	// Determine date range (fetch last 30 days)
 	endDate := time.Now()
-	startDate := endDate.AddDate(0, 0, -30) // Default: last 30 days
-	if lastSync != nil {
-		startDate = lastSync.AddDate(0, 0, 1) // Start from day after last sync
-		logger.Printf("  Last sync: %s\n", lastSync.Format("2006-01-02"))
-	}
+	startDate := endDate.AddDate(0, 0, -30)
 
 	pricesStart := time.Now()
 	prices, err := client.GetDailyPrices(ctx, ticker, startDate, endDate)
@@ -167,41 +145,13 @@ func processStock(ctx context.Context, client *tiingo.Client, db *database.Manag
 
 	logger.Printf("  Retrieved %d price records\n", len(prices))
 
-	// Convert and save to database
-	priceRecords := make([]models.PriceRecord, 0, len(prices))
-	for _, p := range prices {
-		priceRecords = append(priceRecords, models.PriceRecord{
-			Ticker:    ticker,
-			Date:      p.Date.Time,
-			Open:      p.Open,
-			High:      p.High,
-			Low:       p.Low,
-			Close:     p.Close,
-			Volume:    p.Volume,
-			AdjClose:  p.AdjClose,
-			AdjVolume: p.AdjVolume,
-		})
+	// Publish to Kafka
+	publishStart := time.Now()
+	if err := producer.PublishDailyPrices(ctx, ticker, metadata.AssetType, startDate, endDate, prices); err != nil {
+		return fmt.Errorf("publishing to Kafka: %w", err)
 	}
-
-	dbInsertStart := time.Now()
-	if err := db.InsertDailyPrices(ctx, priceRecords); err != nil {
-		return fmt.Errorf("saving prices: %w", err)
-	}
-	logger.Printf("  ⏱️  Price insert: %v\n", time.Since(dbInsertStart))
-
-	// Log successful sync
-	if err := db.LogSyncEvent(ctx, &models.SyncEvent{
-		Ticker:          ticker,
-		SyncDate:        time.Now(),
-		RecordsInserted: len(priceRecords),
-		Status:          "SUCCESS",
-		ErrorMessage:    "",
-	}); err != nil {
-		logger.Printf("  Warning: failed to log sync event: %v\n", err)
-	}
-
-	totalPrices, _ := db.GetPriceCount(ctx, ticker)
-	logger.Printf("  Saved %d new records (total: %d)\n", len(priceRecords), totalPrices)
+	logger.Printf("  ⏱️  Kafka publish: %v\n", time.Since(publishStart))
+	logger.Printf("  ✅ Published %d records to Kafka\n", len(prices))
 
 	if len(prices) > 0 {
 		latest := prices[len(prices)-1]
@@ -222,7 +172,7 @@ func processStock(ctx context.Context, client *tiingo.Client, db *database.Manag
 	return nil
 }
 
-func processCrypto(ctx context.Context, client *tiingo.Client, db *database.Manager, ticker string, logger *log.Logger, verbose bool) error {
+func processCrypto(ctx context.Context, client *tiingo.Client, producer *kafka.Producer, ticker string, logger *log.Logger, verbose bool) error {
 	// For crypto, use the standard ticker format (e.g., "btcusd")
 	cryptoTicker := ticker + "USD"
 	if ticker == "BTCUSD" || ticker == "ETHUSD" {

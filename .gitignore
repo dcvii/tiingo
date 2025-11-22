@@ -1,4 +1,7 @@
 .envrc
 data/*
+logs/
+.kafka-pids
+bin/
 *.duckdb
 *.wal
