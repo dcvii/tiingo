@@ -100,7 +100,9 @@ Ticker:          ticker,
 
 	// Display summary
 	totalTickers, _ := db.GetTickerCount(ctx)
+	totalRequests := client.GetRequestCount()
 	logger.Printf("\n✅ Sync complete! Total tickers in database: %d\n", totalTickers)
+	logger.Printf("📊 Total API requests made: %d\n", totalRequests)
 	logger.Printf("⏱️  Total processing time: %v\n", time.Since(overallStart))
 }
 

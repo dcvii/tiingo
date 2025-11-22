@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"io"
 	"net/http"
+	"sync/atomic"
 	"time"
 
 	"github.com/mdcb/tiingo-tracker/pkg/models"
@@ -20,14 +21,15 @@ const (
 
 // Client wraps the Tiingo API with rate limiting and error handling
 type Client struct {
-	baseURL    string
-	apiKey     string
-	httpClient *http.Client
-	limiter    *rate.Limiter
+	baseURL      string
+	apiKey       string
+	httpClient   *http.Client
+	limiter      *rate.Limiter
+	requestCount atomic.Int64
 }
 
 // NewClient creates a new Tiingo API client
-// Rate limit: 500 requests/hour = ~8 requests/minute = 1 request per 7.5 seconds
+// Rate limit: 10,000 requests/hour = ~166 requests/minute = ~2.77 requests per second
 func NewClient(apiKey string) *Client {
 	return &Client{
 		baseURL: baseURL,
@@ -35,8 +37,8 @@ func NewClient(apiKey string) *Client {
 		httpClient: &http.Client{
 			Timeout: defaultTimeout,
 		},
-		// Allow 1 request per 8 seconds with burst of 5
-		limiter: rate.NewLimiter(rate.Every(8*time.Second), 5),
+		// Allow 2.77 requests per second (10,000/hour) with burst of 50
+		limiter: rate.NewLimiter(rate.Every(360*time.Millisecond), 50),
 	}
 }
 
@@ -46,6 +48,9 @@ func (c *Client) doRequest(ctx context.Context, url string) ([]byte, error) {
 	if err := c.limiter.Wait(ctx); err != nil {
 		return nil, fmt.Errorf("rate limiter error: %w", err)
 	}
+
+	// Increment request counter
+	c.requestCount.Add(1)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
 	if err != nil {
@@ -170,4 +175,9 @@ func (c *Client) ValidateTicker(ctx context.Context, ticker string) (bool, error
 		return false, err
 	}
 	return true, nil
+}
+
+// GetRequestCount returns the total number of API requests made
+func (c *Client) GetRequestCount() int64 {
+	return c.requestCount.Load()
 }
