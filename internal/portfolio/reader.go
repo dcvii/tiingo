@@ -3,8 +3,10 @@ package portfolio
 import (
 	"bufio"
 	"fmt"
+	"log"
 	"os"
 	"strings"
+	"time"
 )
 
 // Reader handles parsing of portfolio files
@@ -18,6 +20,11 @@ func NewReader() *Reader {
 // ReadPortfolio reads and parses a portfolio file containing ticker symbols
 // Expected format: one ticker per line, ignores comments (#) and blank lines
 func (r *Reader) ReadPortfolio(filePath string) ([]string, error) {
+	start := time.Now()
+	defer func() {
+		log.Printf("⏱️  Portfolio read took: %v", time.Since(start))
+	}()
+
 	file, err := os.Open(filePath)
 	if err != nil {
 		return nil, fmt.Errorf("opening portfolio file: %w", err)

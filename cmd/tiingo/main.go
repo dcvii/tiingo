@@ -66,7 +66,9 @@ func main() {
 	defer cancel()
 
 	// Process each ticker
+	overallStart := time.Now()
 	for i, ticker := range tickers {
+		tickerStart := time.Now()
 		logger.Printf("\n[%d/%d] Processing %s...\n", i+1, len(tickers), ticker)
 
 		// Try to detect if it's a crypto ticker
@@ -92,16 +94,25 @@ Ticker:          ticker,
 				ErrorMessage:    syncErr.Error(),
 			})
 		}
+
+		logger.Printf("⏱️  %s processing time: %v\n", ticker, time.Since(tickerStart))
 	}
 
 	// Display summary
 	totalTickers, _ := db.GetTickerCount(ctx)
 	logger.Printf("\n✅ Sync complete! Total tickers in database: %d\n", totalTickers)
+	logger.Printf("⏱️  Total processing time: %v\n", time.Since(overallStart))
 }
 
 func processStock(ctx context.Context, client *tiingo.Client, db *database.Manager, ticker string, logger *log.Logger, verbose bool) error {
 	// Fetch metadata
+	metadataStart := time.Now()
 	metadata, err := client.GetTickerMetadata(ctx, ticker)
+	logger.Printf("  ⏱️  Metadata fetch: %v\n", time.Since(metadataStart))
+	if err != nil {
+		return fmt.Errorf("fetching metadata: %w", err)
+	}
+
 	if err != nil {
 		return fmt.Errorf("fetching metadata: %w", err)
 	}
@@ -111,6 +122,7 @@ func processStock(ctx context.Context, client *tiingo.Client, db *database.Manag
 	logger.Printf("  Type: %s\n", metadata.AssetType)
 
 	// Save metadata to database
+	dbStart := time.Now()
 	tickerRecord := &models.TickerRecord{
 		Ticker:      ticker,
 		Name:        metadata.Name,
@@ -123,6 +135,7 @@ func processStock(ctx context.Context, client *tiingo.Client, db *database.Manag
 	if err := db.UpsertTickerMetadata(ctx, tickerRecord); err != nil {
 		return fmt.Errorf("saving ticker metadata: %w", err)
 	}
+	logger.Printf("  ⏱️  Metadata save: %v\n", time.Since(dbStart))
 
 	if verbose {
 		metadataJSON, _ := json.MarshalIndent(metadata, "  ", "  ")
@@ -143,7 +156,9 @@ func processStock(ctx context.Context, client *tiingo.Client, db *database.Manag
 		logger.Printf("  Last sync: %s\n", lastSync.Format("2006-01-02"))
 	}
 
+	pricesStart := time.Now()
 	prices, err := client.GetDailyPrices(ctx, ticker, startDate, endDate)
+	logger.Printf("  ⏱️  Price fetch: %v\n", time.Since(pricesStart))
 	if err != nil {
 		return fmt.Errorf("fetching prices: %w", err)
 	}
@@ -166,9 +181,11 @@ func processStock(ctx context.Context, client *tiingo.Client, db *database.Manag
 		})
 	}
 
+	dbInsertStart := time.Now()
 	if err := db.InsertDailyPrices(ctx, priceRecords); err != nil {
 		return fmt.Errorf("saving prices: %w", err)
 	}
+	logger.Printf("  ⏱️  Price insert: %v\n", time.Since(dbInsertStart))
 
 	// Log successful sync
 	if err := db.LogSyncEvent(ctx, &models.SyncEvent{
@@ -217,7 +234,9 @@ func processCrypto(ctx context.Context, client *tiingo.Client, db *database.Mana
 	endDate := time.Now()
 	startDate := endDate.AddDate(0, 0, -5)
 
+	cryptoStart := time.Now()
 	prices, err := client.GetCryptoPrices(ctx, cryptoTicker, startDate, endDate)
+	logger.Printf("  ⏱️  Crypto price fetch: %v\n", time.Since(cryptoStart))
 	if err != nil {
 		return fmt.Errorf("fetching crypto prices: %w", err)
 	}
