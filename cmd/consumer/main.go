@@ -17,7 +17,7 @@ import (
 func main() {
 	// Parse command-line flags
 	dbPath := flag.String("db", "portfolio.duckdb", "Path to DuckDB database file")
-	brokers := flag.String("brokers", "localhost:9092", "Comma-separated list of Kafka brokers")
+	brokers := flag.String("brokers", "gold:9092", "Comma-separated list of Kafka brokers")
 	topic := flag.String("topic", kafka.TopicDailyPrices, "Kafka topic to consume from")
 	consumerGroup := flag.String("group", kafka.ConsumerGroupDB, "Kafka consumer group ID")
 	verbose := flag.Bool("verbose", false, "Enable verbose logging")

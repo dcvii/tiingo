@@ -150,16 +150,29 @@ The producer will fetch data from Tiingo API and publish to Kafka. The consumer 
 ### View Consumer Group Status
 ```bash
 kafka-consumer-groups --bootstrap-server gold:9092 \
-  --describe --group tiingo-db-writer --command-config ~/.kafka/client.properties
-  
+  --describe --group tiingo-db-writer
 ```
 
 ### View Topic Messages (for debugging)
 ```bash
-kafka-console-consumer --bootstrap-server localhost:9092 \
+kafka-console-consumer --bootstrap-server gold:9092 \
   --topic tiingo.daily_prices \
   --from-beginning \
   --max-messages 1
+```
+
+### Check Broker Status
+```bash
+# List all topics
+kafka-topics --list --bootstrap-server gold:9092
+
+# Describe topic details
+kafka-topics --describe \
+  --bootstrap-server gold:9092 \
+  --topic tiingo.daily_prices
+
+# Check broker metadata
+kafka-broker-api-versions --bootstrap-server gold:9092
 ```
 
 ## Idempotency
@@ -176,7 +189,7 @@ To reprocess all messages from the beginning:
 1. Stop the consumer
 2. Delete the consumer group:
    ```bash
-   kafka-consumer-groups --bootstrap-server localhost:9092 \
+   kafka-consumer-groups --bootstrap-server gold:9092 \
      --delete --group tiingo-db-writer
    ```
 3. Restart the consumer
