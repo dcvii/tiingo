@@ -26,7 +26,10 @@ func main() {
 	// Get API key from environment
 	apiKey := os.Getenv("TIINGO_API_KEY")
 	if apiKey == "" {
-		log.Fatal("TIINGO_API_KEY environment variable not set")
+		log.Fatal("ERROR: TIINGO_API_KEY environment variable not set.\n" +
+			"Please set it using one of:\n" +
+			"  1. Fetch from Vault: direnv allow (after vault-login)\n" +
+			"  2. Set manually: export TIINGO_API_KEY=your_key_here")
 	}
 
 	// Initialize logger
