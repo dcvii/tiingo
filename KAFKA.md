@@ -149,8 +149,9 @@ The producer will fetch data from Tiingo API and publish to Kafka. The consumer 
 
 ### View Consumer Group Status
 ```bash
-kafka-consumer-groups --bootstrap-server localhost:9092 \
-  --describe --group tiingo-db-writer
+kafka-consumer-groups --bootstrap-server gold:9092 \
+  --describe --group tiingo-db-writer --command-config ~/.kafka/client.properties
+  
 ```
 
 ### View Topic Messages (for debugging)
