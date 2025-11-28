@@ -1,4 +1,13 @@
 .envrc
 data/*
+logs/
+.kafka-pids
+bin/
 *.duckdb
 *.wal
+.client.properties
+
+# Test artifacts
+test_*.log
+test_*.duckdb
+test_*.duckdb.wal
