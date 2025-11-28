@@ -4,11 +4,13 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
+	"os"
 	"time"
 
 	"github.com/google/uuid"
 	"github.com/mdcb/tiingo-tracker/pkg/models"
 	"github.com/segmentio/kafka-go"
+	"github.com/segmentio/kafka-go/sasl/plain"
 )
 
 // Producer handles publishing messages to Kafka
@@ -23,6 +25,21 @@ func NewProducer(config *Config) (*Producer, error) {
 		return nil, fmt.Errorf("invalid config: %w", err)
 	}
 
+	// Configure SASL transport if credentials are available
+	transport := &kafka.Transport{}
+	
+	// Check for SASL credentials in environment
+	kafkaUsername := os.Getenv("KAFKA_USERNAME")
+	kafkaPassword := os.Getenv("KAFKA_PASSWORD")
+	kafkaSecurityProtocol := os.Getenv("KAFKA_SECURITY_PROTOCOL")
+	
+	if kafkaUsername != "" && kafkaPassword != "" && kafkaSecurityProtocol == "SASL_PLAINTEXT" {
+		transport.SASL = plain.Mechanism{
+			Username: kafkaUsername,
+			Password: kafkaPassword,
+		}
+	}
+
 	writer := &kafka.Writer{
 		Addr:         kafka.TCP(config.Brokers...),
 		Topic:        config.Topic,
@@ -32,6 +49,7 @@ func NewProducer(config *Config) (*Producer, error) {
 		Compression:  kafka.Snappy,
 		RequiredAcks: kafka.RequireOne, // Wait for leader ack
 		Async:        false,             // Synchronous writes for reliability
+		Transport:    transport,         // Use configured transport with SASL
 	}
 
 	return &Producer{
