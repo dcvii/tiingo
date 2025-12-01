@@ -1,29 +1,40 @@
 # Tiingo Portfolio Tracker
 
-A Go-based application that automatically fetches market data from the [Tiingo API](https://www.tiingo.com/) and stores it in a local DuckDB database. Track stocks and cryptocurrencies with automated daily syncing.
+A Go-based application that automatically fetches market data from the [Tiingo API](https://www.tiingo.com/) and stores it in a local DuckDB database. Track stocks and cryptocurrencies with automated daily syncing via Kafka messaging architecture.
 
 ## Overview
 
-This application reads a portfolio of ticker symbols from a text file, fetches historical and current market data from Tiingo, and maintains a local DuckDB database for fast querying and analysis. It includes intelligent incremental syncing to minimize API calls and features built-in rate limiting to comply with Tiingo's free tier limits.
+This application reads a portfolio of ticker symbols from a text file, fetches historical and current market data from Tiingo, and maintains a local DuckDB database for fast querying and analysis. The application uses a **Kafka-based architecture** for decoupling API fetching from database persistence, providing idempotency, auditability, and scalability.
+
+**Architecture:**
+- **Producer** (`tiingo`): Fetches data from Tiingo API → publishes to Kafka
+- **Consumer** (`consumer`): Consumes from Kafka → persists to DuckDB
+- **Broker**: Kafka running on `gold` server (192.168.1.178:9092)
 
 ## Features
 
+- **Kafka Architecture**: Producer/Consumer pattern for decoupled processing
 - **Multi-Asset Support**: Handles both stocks (equities) and cryptocurrencies
 - **Incremental Sync**: Only fetches new data since last sync to optimize API usage
 - **Rate Limiting**: Built-in request throttling (1 request per 8 seconds with burst of 5)
 - **Idempotent**: Prevents duplicate records with `ON CONFLICT` handling
+- **Message Replay**: Kafka enables reprocessing failed database writes
+- **Audit Trail**: Raw API responses preserved in Kafka topics
 - **Metadata Tracking**: Stores ticker information (name, exchange, asset type, date ranges)
 - **Sync Logging**: Comprehensive audit trail of all sync operations
 - **Error Handling**: Graceful error handling with detailed logging
 - **DuckDB Storage**: Fast, embedded analytical database with zero setup
+- **Scalability**: Multiple consumers can process the same data stream
 
 ## Technology Stack
 
 - **Language**: Go 1.25.1
 - **Database**: [DuckDB](https://duckdb.org/) via [go-duckdb](https://github.com/marcboeker/go-duckdb) v1.8.5
+- **Messaging**: [Apache Kafka](https://kafka.apache.org/) via [segmentio/kafka-go](https://github.com/segmentio/kafka-go) v0.4.49
 - **API**: [Tiingo](https://www.tiingo.com/) for market data
 - **Rate Limiting**: [golang.org/x/time/rate](https://pkg.go.dev/golang.org/x/time/rate)
 - **Environment**: direnv for environment variable management
+- **Kafka Broker**: Running on `gold` server (192.168.1.178:9092)
 
 ## Project Structure
 
@@ -35,10 +46,15 @@ tiingo/
 ├── go.sum                      # Dependency checksums
 ├── portfolio.duckdb            # DuckDB database file
 ├── README.md                   # This file
+├── KAFKA.md                    # Kafka architecture documentation
 ├── cmd/
-│   └── tiingo/
-│       ├── main.go            # Application entry point
-│       └── main_test.go       # Integration tests
+│   ├── tiingo/
+│   │   ├── main.go            # Producer - fetches API data to Kafka
+│   │   └── main_test.go       # Integration tests
+│   ├── consumer/
+│   │   └── main.go            # Consumer - Kafka to DuckDB
+│   └── quick-check/
+│       └── main.go            # Connectivity testing utility
 ├── context/
 │   ├── dev_plan.md            # Development plan and documentation
 │   └── status_*.md            # Status reports
@@ -53,13 +69,25 @@ tiingo/
 ├── internal/
 │   ├── database/
 │   │   └── manager.go        # DuckDB operations manager
+│   ├── kafka/
+│   │   ├── config.go          # Kafka configuration
+│   │   ├── producer.go        # Kafka producer implementation
+│   │   ├── consumer.go        # Kafka consumer implementation
+│   │   └── config_test.go     # Kafka tests
 │   ├── portfolio/
 │   │   └── reader.go         # Portfolio file parser
 │   └── tiingo/
 │       └── client.go         # Tiingo API client
-└── pkg/
-    └── models/
-        └── types.go          # Shared data types
+├── pkg/
+│   └── models/
+│       ├── types.go          # Shared data types
+│       └── kafka.go          # Kafka message structures
+└── scripts/
+    ├── quick-check.sh         # System connectivity check
+    ├── test-kafka-connectivity.sh # Kafka connectivity tests
+    ├── test-kafka-e2e.sh      # End-to-end pipeline tests
+    ├── start-kafka.sh         # Kafka service management
+    └── stop-kafka.sh          # Kafka service management
 ```
 
 ## Installation
@@ -95,12 +123,35 @@ tiingo/
    direnv allow
    ```
 
-4. **Build the application**:
+4. **Build the applications**:
    ```bash
+   # Build producer
    go build -o tiingo cmd/tiingo/main.go
+   
+   # Build consumer
+   go build -o consumer cmd/consumer/main.go
+   
+   # Build connectivity check utility
+   go build -o quick-check cmd/quick-check/main.go
    ```
 
 ## Usage
+
+### Kafka Architecture
+
+**New in v2.0**: The application now uses a Kafka-based architecture with separate producer and consumer processes:
+
+1. **Producer** (`tiingo`): Fetches data from Tiingo API → publishes to Kafka topics
+2. **Consumer** (`consumer`): Consumes from Kafka topics → persists to DuckDB database
+3. **Broker**: Kafka running on `gold` server (no local installation required)
+
+**Benefits:**
+- **Idempotency**: Replay messages if database writes fail
+- **Decoupling**: API fetching and DB operations are independent
+- **Audit Trail**: Raw API responses preserved in Kafka
+- **Scalability**: Multiple consumers can process the same data
+
+See [KAFKA.md](KAFKA.md) for detailed architecture documentation.
 
 ### Portfolio Configuration
 
@@ -128,54 +179,102 @@ BTC
 
 ### Running the Application
 
-**Basic sync** (fetches new data since last sync):
+#### Option 1: Kafka Architecture (Recommended)
+
+**Terminal 1** - Start the consumer (database writer):
 ```bash
-./tiingo
+./consumer -verbose
 ```
 
-**With custom paths**:
-```bash
-./tiingo -portfolio data/portfolio.txt -db portfolio.duckdb
-```
-
-**Verbose mode** (detailed logging):
+**Terminal 2** - Run the producer (API fetcher):
 ```bash
 ./tiingo -verbose
 ```
 
+The producer fetches data from Tiingo API and publishes to Kafka. The consumer reads from Kafka and persists to DuckDB.
+
+#### Option 2: Direct Mode (Legacy)
+
+**Basic sync** (direct API to database, bypassing Kafka):
+```bash
+./tiingo -direct
+```
+
+**With custom options**:
+```bash
+# Producer with custom Kafka settings
+./tiingo -portfolio data/portfolio.txt -brokers gold:9092 -topic tiingo.daily_prices -verbose
+
+# Consumer with custom database
+./consumer -db portfolio.duckdb -brokers gold:9092 -topic tiingo.daily_prices -verbose
+```
+
 ### Command-Line Flags
 
+#### Producer (`tiingo`) Flags:
 | Flag | Default | Description |
 |------|---------|-------------|
 | `-portfolio` | `data/portfolio.txt` | Path to portfolio file |
+| `-brokers` | `gold:9092` | Comma-separated Kafka broker addresses |
+| `-topic` | `tiingo.daily_prices` | Kafka topic to publish to |
+| `-direct` | `false` | Skip Kafka, write directly to database |
+| `-db` | `portfolio.duckdb` | Database path (direct mode only) |
+| `-verbose` | `false` | Enable detailed logging |
+
+#### Consumer (`consumer`) Flags:
+| Flag | Default | Description |
+|------|---------|-------------|
 | `-db` | `portfolio.duckdb` | Path to DuckDB database file |
+| `-brokers` | `gold:9092` | Comma-separated Kafka broker addresses |
+| `-topic` | `tiingo.daily_prices` | Kafka topic to consume from |
+| `-group` | `tiingo-db-writer` | Kafka consumer group ID |
 | `-verbose` | `false` | Enable detailed logging |
 
 ### Example Output
 
+#### Producer Output:
 ```
-2025/11/05 14:39:22 Starting Tiingo Portfolio Sync
-2025/11/05 14:39:22 ✅ Database initialized
-2025/11/05 14:39:22 Found 7 ticker(s): [BTC BRKB DAL GFS MUB ORCL IBM]
+2025/11/28 14:39:22 Starting Tiingo Kafka Producer
+2025/11/28 14:39:22 ✅ Kafka producer initialized (brokers: [gold:9092])
+2025/11/28 14:39:22 Found 7 ticker(s): [BTC BRKB DAL GFS MUB ORCL IBM]
 
 [1/7] Processing BTC...
   Type: Cryptocurrency
   Ticker: BTCUSD
   Retrieved 5 price records
-  Latest Close: $67543.21 (Date: 2025-11-05)
+  📨 Published to Kafka: tiingo.daily_prices
+  Message ID: abc123-def456-789
 
 [2/7] Processing BRKB...
   Name: Berkshire Hathaway Inc. Class B
   Exchange: NYSE
   Type: Stock
-  Last sync: 2025-11-04
   Retrieved 1 price records
-  Saved 1 new records (total: 30)
-  Latest Close: $451.23 (Date: 2025-11-05)
+  📨 Published to Kafka: tiingo.daily_prices
+  Message ID: xyz789-abc123-456
 
-...
+✅ Producer complete! Published 7 messages to Kafka
+```
 
-✅ Sync complete! Total tickers in database: 7
+#### Consumer Output:
+```
+2025/11/28 14:39:30 Starting Tiingo Kafka Consumer
+2025/11/28 14:39:30 ✅ Database initialized
+2025/11/28 14:39:30 ✅ Kafka consumer initialized
+2025/11/28 14:39:30 🚀 Consumer started. Listening on topic: tiingo.daily_prices
+
+📬 Processing message: BTC (5 records)
+  💾 Saved 5 new price records
+  ✅ Message committed
+
+📬 Processing message: BRKB (1 records)
+  💾 Saved 1 new price records
+  ✅ Message committed
+
+📊 Consumer Statistics:
+  Messages: 7
+  Bytes: 15,432
+  Errors: 0
 ```
 
 ## Database Schema
@@ -296,31 +395,121 @@ COPY (
 
 ## Automation
 
-### Daily Sync with Cron
+### Daily Sync with Kafka Pipeline
+
+#### Option 1: Systemd Services (Linux)
+
+Create systemd services for producer and consumer:
+
+**Consumer Service** (`/etc/systemd/system/tiingo-consumer.service`):
+```ini
+[Unit]
+Description=Tiingo Kafka Consumer
+After=network.target
+
+[Service]
+Type=simple
+User=mdcb
+WorkingDirectory=/Users/mdcb/devcode/PFIN/tiingo
+Environment=TIINGO_API_KEY=your_api_key_here
+ExecStart=/Users/mdcb/devcode/PFIN/tiingo/consumer -verbose
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target
+```
+
+**Producer Timer** (`/etc/systemd/system/tiingo-producer.timer`):
+```ini
+[Unit]
+Description=Run Tiingo Producer Daily
+Requires=tiingo-producer.service
+
+[Timer]
+# Run at 4:30 PM PT (after market close), Monday-Friday
+OnCalendar=Mon..Fri *-*-* 16:30:00
+Persistent=true
+
+[Install]
+WantedBy=timers.target
+```
+
+**Producer Service** (`/etc/systemd/system/tiingo-producer.service`):
+```ini
+[Unit]
+Description=Tiingo Kafka Producer
+
+[Service]
+Type=oneshot
+User=mdcb
+WorkingDirectory=/Users/mdcb/devcode/PFIN/tiingo
+Environment=TIINGO_API_KEY=your_api_key_here
+ExecStart=/Users/mdcb/devcode/PFIN/tiingo/tiingo -verbose
+```
+
+Enable services:
+```bash
+sudo systemctl enable tiingo-consumer.service
+sudo systemctl enable tiingo-producer.timer
+sudo systemctl start tiingo-consumer.service
+sudo systemctl start tiingo-producer.timer
+```
+
+#### Option 2: Cron (Legacy Direct Mode)
 
 Add to crontab (`crontab -e`):
 ```bash
 # Run at 4:30 PM PT (after market close)
-30 16 * * 1-5 cd /Users/mdcb/devcode/PFIN/tiingo && ./tiingo >> logs/sync.log 2>&1
+30 16 * * 1-5 cd /Users/mdcb/devcode/PFIN/tiingo && ./tiingo -direct >> logs/sync.log 2>&1
 ```
 
-### macOS launchd (Recommended)
+#### Option 3: macOS launchd
 
-Create `~/Library/LaunchAgents/com.mdcb.tiingo.plist`:
+**Consumer Daemon** (`~/Library/LaunchAgents/com.mdcb.tiingo.consumer.plist`):
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
     <key>Label</key>
-    <string>com.mdcb.tiingo</string>
+    <string>com.mdcb.tiingo.consumer</string>
+    <key>ProgramArguments</key>
+    <array>
+        <string>/Users/mdcb/devcode/PFIN/tiingo/consumer</string>
+        <string>-verbose</string>
+    </array>
+    <key>KeepAlive</key>
+    <true/>
+    <key>RunAtLoad</key>
+    <true/>
+    <key>WorkingDirectory</key>
+    <string>/Users/mdcb/devcode/PFIN/tiingo</string>
+    <key>EnvironmentVariables</key>
+    <dict>
+        <key>TIINGO_API_KEY</key>
+        <string>your_api_key_here</string>
+    </dict>
+    <key>StandardOutPath</key>
+    <string>/Users/mdcb/devcode/PFIN/tiingo/logs/consumer.log</string>
+    <key>StandardErrorPath</key>
+    <string>/Users/mdcb/devcode/PFIN/tiingo/logs/consumer-error.log</string>
+</dict>
+</plist>
+```
+
+**Producer Timer** (`~/Library/LaunchAgents/com.mdcb.tiingo.producer.plist`):
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>com.mdcb.tiingo.producer</string>
     <key>ProgramArguments</key>
     <array>
         <string>/Users/mdcb/devcode/PFIN/tiingo/tiingo</string>
-        <string>-portfolio</string>
-        <string>data/portfolio.txt</string>
-        <string>-db</string>
-        <string>portfolio.duckdb</string>
+        <string>-verbose</string>
     </array>
     <key>StartCalendarInterval</key>
     <dict>
@@ -337,16 +526,17 @@ Create `~/Library/LaunchAgents/com.mdcb.tiingo.plist`:
         <string>your_api_key_here</string>
     </dict>
     <key>StandardOutPath</key>
-    <string>/Users/mdcb/devcode/PFIN/tiingo/logs/stdout.log</string>
+    <string>/Users/mdcb/devcode/PFIN/tiingo/logs/producer.log</string>
     <key>StandardErrorPath</key>
-    <string>/Users/mdcb/devcode/PFIN/tiingo/logs/stderr.log</string>
+    <string>/Users/mdcb/devcode/PFIN/tiingo/logs/producer-error.log</string>
 </dict>
 </plist>
 ```
 
-Load the agent:
+Load the agents:
 ```bash
-launchctl load ~/Library/LaunchAgents/com.mdcb.tiingo.plist
+launchctl load ~/Library/LaunchAgents/com.mdcb.tiingo.consumer.plist
+launchctl load ~/Library/LaunchAgents/com.mdcb.tiingo.producer.plist
 ```
 
 ## API Rate Limits
@@ -389,7 +579,24 @@ All errors are logged to the sync_log table for auditing.
 
 ## Testing
 
-### Run Tests
+### Connectivity Testing
+
+**Quick system check**:
+```bash
+./scripts/quick-check.sh
+```
+
+**Kafka connectivity**:
+```bash
+./scripts/test-kafka-connectivity.sh
+```
+
+**End-to-end pipeline test**:
+```bash
+./scripts/test-kafka-e2e.sh
+```
+
+### Unit Tests
 ```bash
 # Run all tests
 go test ./... -v
@@ -401,31 +608,48 @@ go test ./... -cover
 go test ./... -race
 
 # Test specific package
+go test ./internal/kafka -v
 go test ./cmd/tiingo -v
 ```
 
 ### Test Coverage
 The test suite includes:
+- Kafka configuration and connectivity
+- Producer message serialization
+- Consumer message processing
 - Ticker format validation (stocks vs crypto)
 - Crypto ticker conversion logic (BTC → BTCUSD)
 - Sync event logging with original ticker preservation
 - Stock ticker pass-through (no conversion)
+- Database idempotency (duplicate prevention)
 
 ## Development
 
 ### Build for Development
 ```bash
+# Build all components
+make build  # or manually:
 go build -o tiingo cmd/tiingo/main.go
+go build -o consumer cmd/consumer/main.go
+go build -o quick-check cmd/quick-check/main.go
 ```
 
 ### Build with Optimizations (Production)
 ```bash
+# Producer
 go build -ldflags "-s -w" -o tiingo cmd/tiingo/main.go
+# Consumer
+go build -ldflags "-s -w" -o consumer cmd/consumer/main.go
 ```
 
 ### Run Without Building
 ```bash
+# Producer
 go run cmd/tiingo/main.go -verbose
+# Consumer
+go run cmd/consumer/main.go -verbose
+# Quick check
+go run cmd/quick-check/main.go
 ```
 
 ### Format Code
@@ -463,33 +687,76 @@ ANALYZE;
 
 ## Troubleshooting
 
+### Kafka Connectivity Issues
+
+**Cannot connect to Kafka broker**:
+```
+Error: failed to dial: dial tcp gold:9092: connection refused
+```
+**Solutions**:
+1. Verify gold server is reachable: `ping gold`
+2. Check Kafka is running: `telnet gold 9092`
+3. Run connectivity test: `./scripts/test-kafka-connectivity.sh`
+
+**Consumer group errors**:
+```
+Error: consumer group coordination error
+```
+**Solution**: Reset consumer group: `./scripts/stop-kafka.sh && ./scripts/start-kafka.sh`
+
 ### API Key Not Set
 ```
 Error: TIINGO_API_KEY environment variable not set
 ```
 **Solution**: Ensure `.envrc` is configured and `direnv allow` has been run.
 
-### Database Locked
+### Database Issues
+
+**Database Locked**:
 ```
 Error: database is locked
 ```
 **Solution**: Ensure no other process is accessing the database. Close any DuckDB CLI sessions.
 
-### Invalid Ticker
+**Consumer cannot write to database**:
+- Check database file permissions
+- Ensure consumer has exclusive access
+- Stop any other DuckDB processes
+
+### API Issues
+
+**Invalid Ticker**:
 ```
 Error: API error (status 404): ticker not found
 ```
 **Solution**: Verify ticker symbol is correct. Check Tiingo documentation for supported tickers.
 
-### Rate Limit Exceeded
+**Rate Limit Exceeded**:
 The built-in rate limiter should prevent this, but if you see rate limit errors:
 - Reduce the burst size in `client.go`
 - Increase the delay between requests
 - Split your portfolio into smaller batches
 
+### Kafka Message Issues
+
+**Messages not being consumed**:
+1. Check consumer group status: `kafka-consumer-groups --bootstrap-server gold:9092 --describe --group tiingo-db-writer`
+2. Verify topic exists: `kafka-topics --list --bootstrap-server gold:9092`
+3. Check message format compatibility
+
+**Messages stuck in Kafka**:
+- Consumer might have crashed during processing
+- Reset consumer group offset or replay messages
+- Check consumer logs for errors
+
 ## Future Enhancements
 
 Potential features for future development:
+- [ ] Multiple Kafka topic support (stocks vs crypto)
+- [ ] Schema registry integration for message versioning
+- [ ] Consumer horizontal scaling (multiple instances)
+- [ ] Dead letter queue for failed messages
+- [ ] Kafka Connect integration
 - [ ] Support for custom date ranges via CLI flags
 - [ ] Export reports (PDF, Excel)
 - [ ] Web dashboard with charts
@@ -498,8 +765,8 @@ Potential features for future development:
 - [ ] Portfolio valuation with share quantities
 - [ ] Alert system for price thresholds
 - [ ] Support for international exchanges
-- [ ] Parallel processing with worker pools
 - [ ] PostgreSQL migration support (via `pggold`)
+- [ ] Kubernetes deployment manifests
 
 ## License
 
@@ -510,6 +777,9 @@ This is a personal project. See repository for license information.
 - [Tiingo API Documentation](https://api.tiingo.com/documentation/general/overview)
 - [DuckDB Documentation](https://duckdb.org/docs/)
 - [go-duckdb Driver](https://github.com/marcboeker/go-duckdb)
+- [Apache Kafka Documentation](https://kafka.apache.org/documentation/)
+- [segmentio/kafka-go](https://github.com/segmentio/kafka-go)
+- [KAFKA.md](KAFKA.md) - Detailed architecture documentation
 
 ## Contributing
 
@@ -517,6 +787,6 @@ This is a personal portfolio tracker. For questions or suggestions, please open 
 
 ---
 
-**Last Updated**: 2025-11-20  
-**Version**: 1.0.0  
+**Last Updated**: 2025-12-01  
+**Version**: 2.0.0 (Kafka Architecture)  
 **Author**: mdcb
