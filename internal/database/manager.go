@@ -8,7 +8,7 @@ import (
 	"time"
 
 	_ "github.com/marcboeker/go-duckdb"
-	"github.com/mdcb/tiingo-tracker/pkg/models"
+	"github.com/dcvii/tiingo/pkg/models"
 )
 
 //go:embed ddl/*.sql

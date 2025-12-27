@@ -10,8 +10,8 @@ import (
 	"strings"
 	"syscall"
 
-	"github.com/mdcb/tiingo-tracker/internal/database"
-	"github.com/mdcb/tiingo-tracker/internal/kafka"
+	"github.com/dcvii/tiingo/internal/database"
+	"github.com/dcvii/tiingo/internal/kafka"
 )
 
 func main() {

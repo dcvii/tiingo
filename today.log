@@ -1,0 +1,1109 @@
+🚀 Running Tiingo Producer...
+2025/12/27 14:46:23 Starting Tiingo API to Kafka Producer
+2025/12/27 14:46:23 Portfolio file: data/portfolio.txt
+2025/12/27 14:46:23 Brokers: gold:9092
+2025/12/27 14:46:23 Topic: tiingo.daily_prices
+2025/12/27 14:46:23 ✅ Kafka producer initialized
+2025/12/27 14:46:23 Found 26 ticker(s): [BTC BRK-B DAL GFS MUB ORCL IBM INTC TSLA PDI IVLU CEG D VST NRG ETR NEE BEP AES CWEN PWR FLNC ETN BWXT SMR OKLO]
+2025/12/27 14:46:23 
+[1/26] Processing BTC...
+2025/12/27 14:46:23   Type: Cryptocurrency
+2025/12/27 14:46:23   Ticker: BTCUSD
+2025/12/27 14:46:23   ⏱️  Crypto price fetch: 379.926208ms
+2025/12/27 14:46:23   Retrieved 6 price records
+2025/12/27 14:46:23   Latest Close: $87478.50 (Date: 0001-01-01)
+2025/12/27 14:46:23   Recent prices:
+2025/12/27 14:46:23     0001-01-01: Open=$88647.42 High=$90545.56 Low=$87862.52 Close=$88561.27 Volume=14939.14
+2025/12/27 14:46:23     0001-01-01: Open=$88561.49 High=$88899.58 Low=$86553.36 Close=$87434.92 Volume=12369.86
+2025/12/27 14:46:23     0001-01-01: Open=$87436.32 High=$88003.27 Low=$86368.03 Close=$87617.16 Volume=8541.35
+2025/12/27 14:46:23     0001-01-01: Open=$87616.61 High=$88535.86 Low=$86907.88 Close=$87181.62 Volume=4758.47
+2025/12/27 14:46:23     0001-01-01: Open=$87184.41 High=$89490.38 Low=$86578.29 Close=$87344.40 Volume=13317.24
+2025/12/27 14:46:23     0001-01-01: Open=$87301.60 High=$87955.17 Low=$86969.52 Close=$87478.50 Volume=2583.84
+2025/12/27 14:46:23 ⏱️  BTC processing time: 380.035792ms
+2025/12/27 14:46:23 
+[2/26] Processing BRK-B...
+2025/12/27 14:46:23   ⏱️  Metadata fetch: 118.89575ms
+2025/12/27 14:46:23   Name: Berkshire Hathaway Inc - Class B
+2025/12/27 14:46:23   Exchange: NYSE
+2025/12/27 14:46:23   Type: 
+2025/12/27 14:46:23   Metadata:
+{
+    "ticker": "BRK-B",
+    "name": "Berkshire Hathaway Inc - Class B",
+    "exchangeCode": "NYSE",
+    "assetType": "",
+    "startDate": "1996-05-09T00:00:00Z",
+    "endDate": "2025-12-26T00:00:00Z",
+    "description": "Berkshire Hathaway Inc. (Berkshire) is a holding company owning subsidiaries engaged in a number of diverse business activities. The Company is engaged in the insurance businesses conducted on both a primary basis and a reinsurance basis, a freight rail transportation business and a group of utility, and energy generation and distribution businesses. Berkshire also owns and operates a number of other businesses engaged in a variety of activities. In October 2012, HomeServices acquired a 66.7% interest in the residential real estate brokerage franchise network in the United States. The Company's insurance underwriting operations are consisted of the sub-groups, including GEICO and its subsidiaries, General Re and its subsidiaries, Berkshire Hathaway Reinsurance Group and Berkshire Hathaway Primary Group. In May 2013, Berkshire acquired the remaining 20% stake in IMC International Metalworking Companies BV."
+  }
+2025/12/27 14:46:24   ⏱️  Price fetch: 119.979583ms
+2025/12/27 14:46:24   Retrieved 20 price records
+2025/12/27 14:46:24   ⏱️  Kafka publish: 105.855208ms
+2025/12/27 14:46:24   ✅ Published 20 records to Kafka
+2025/12/27 14:46:24   Latest Close: $498.30 (Date: 2025-12-26)
+2025/12/27 14:46:24   Recent prices:
+2025/12/27 14:46:24     2025-11-28: Open=$511.89 High=$516.85 Low=$511.56 Close=$513.81 Volume=2312245
+2025/12/27 14:46:24     2025-12-01: Open=$513.64 High=$514.49 Low=$508.18 Close=$508.55 Volume=3995153
+2025/12/27 14:46:24     2025-12-02: Open=$507.59 High=$508.11 Low=$503.11 Close=$506.65 Volume=3378009
+2025/12/27 14:46:24     2025-12-03: Open=$507.52 High=$509.60 Low=$503.60 Close=$503.60 Volume=3803234
+2025/12/27 14:46:24     2025-12-04: Open=$504.38 High=$506.50 Low=$500.70 Close=$503.23 Volume=3574809
+2025/12/27 14:46:24     2025-12-05: Open=$503.86 High=$505.76 Low=$500.54 Close=$504.34 Volume=3463668
+2025/12/27 14:46:24     2025-12-08: Open=$502.10 High=$502.97 Low=$490.62 Close=$497.23 Volume=6953391
+2025/12/27 14:46:24     2025-12-09: Open=$497.62 High=$499.21 Low=$490.83 Close=$491.43 Volume=4475696
+2025/12/27 14:46:24     2025-12-10: Open=$490.86 High=$495.88 Low=$488.92 Close=$490.43 Volume=4558796
+2025/12/27 14:46:24     2025-12-11: Open=$491.83 High=$498.14 Low=$491.83 Close=$495.85 Volume=4493445
+2025/12/27 14:46:24     2025-12-12: Open=$496.71 High=$500.00 Low=$494.50 Close=$499.52 Volume=4113658
+2025/12/27 14:46:24     2025-12-15: Open=$500.42 High=$506.62 Low=$500.27 Close=$506.38 Volume=5173886
+2025/12/27 14:46:24     2025-12-16: Open=$507.05 High=$508.10 Low=$499.45 Close=$499.84 Volume=4376710
+2025/12/27 14:46:24     2025-12-17: Open=$499.90 High=$505.19 Low=$499.50 Close=$504.27 Volume=4128603
+2025/12/27 14:46:24     2025-12-18: Open=$502.23 High=$505.43 Low=$501.01 Close=$503.39 Volume=3646672
+2025/12/27 14:46:24     2025-12-19: Open=$503.05 High=$503.82 Low=$494.53 Close=$494.53 Volume=14652814
+2025/12/27 14:46:24     2025-12-22: Open=$496.34 High=$500.31 Low=$495.55 Close=$499.95 Volume=4069970
+2025/12/27 14:46:24     2025-12-23: Open=$500.48 High=$502.33 Low=$498.15 Close=$500.51 Volume=3680788
+2025/12/27 14:46:24     2025-12-24: Open=$500.29 High=$501.51 Low=$499.25 Close=$501.34 Volume=2000186
+2025/12/27 14:46:24     2025-12-26: Open=$500.45 High=$501.56 Low=$496.83 Close=$498.30 Volume=2247590
+2025/12/27 14:46:24 ⏱️  BRK-B processing time: 345.1425ms
+2025/12/27 14:46:24 
+[3/26] Processing DAL...
+2025/12/27 14:46:24   ⏱️  Metadata fetch: 106.719333ms
+2025/12/27 14:46:24   Name: Delta Air Lines Inc
+2025/12/27 14:46:24   Exchange: NYSE
+2025/12/27 14:46:24   Type: 
+2025/12/27 14:46:24   Metadata:
+{
+    "ticker": "DAL",
+    "name": "Delta Air Lines Inc",
+    "exchangeCode": "NYSE",
+    "assetType": "",
+    "startDate": "2007-05-03T00:00:00Z",
+    "endDate": "2025-12-26T00:00:00Z",
+    "description": "No one better connects the world Through exceptional service and the power of innovation, Delta Air Lines never stops looking for ways to make every trip feel tailored to every customer. There are 100,000 Delta people leading the way to deliver a world-class customer experience on up to 5,000 peak day Delta and Delta Connection flights to more than 300 destinations on six continents, connecting people to places and to each other. Delta served more than 200 million customers in 2024 – safely, reliably and with industry-leading customer service innovation – and was recognized by J.D. Power this year for being No. 1 in Premium Economy Passenger Satisfaction. The airline also was recognized as the top U.S. airline by the Wall Street Journal and as North America's most on-time airline in 2024 and our people earned the Platinum Award for Operational Excellence from Cirium. We remain committed to ensuring that the future of travel is connected, personalized and enjoyable. Our people's genuine, enduring motivation is to make every customer feel welcomed and cared for across every point of their journey with us. SOURCE Delta Air Lines"
+  }
+2025/12/27 14:46:24   ⏱️  Price fetch: 132.807083ms
+2025/12/27 14:46:24   Retrieved 20 price records
+2025/12/27 14:46:24   ⏱️  Kafka publish: 16.834417ms
+2025/12/27 14:46:24   ✅ Published 20 records to Kafka
+2025/12/27 14:46:24   Latest Close: $70.85 (Date: 2025-12-26)
+2025/12/27 14:46:24   Recent prices:
+2025/12/27 14:46:24     2025-11-28: Open=$64.57 High=$64.97 Low=$64.10 Close=$64.10 Volume=3476225
+2025/12/27 14:46:24     2025-12-01: Open=$63.39 High=$64.97 Low=$63.00 Close=$64.15 Volume=7252925
+2025/12/27 14:46:24     2025-12-02: Open=$64.40 High=$65.73 Low=$63.82 Close=$65.14 Volume=7337561
+2025/12/27 14:46:24     2025-12-03: Open=$65.12 High=$67.62 Low=$65.12 Close=$67.49 Volume=10140647
+2025/12/27 14:46:24     2025-12-04: Open=$67.60 High=$68.06 Low=$66.86 Close=$67.24 Volume=9455899
+2025/12/27 14:46:24     2025-12-05: Open=$66.75 High=$67.75 Low=$66.30 Close=$67.10 Volume=7895552
+2025/12/27 14:46:24     2025-12-08: Open=$67.68 High=$67.75 Low=$66.05 Close=$67.22 Volume=9207470
+2025/12/27 14:46:24     2025-12-09: Open=$66.71 High=$68.28 Low=$66.30 Close=$67.41 Volume=7335341
+2025/12/27 14:46:24     2025-12-10: Open=$67.69 High=$69.95 Low=$67.26 Close=$69.93 Volume=11823243
+2025/12/27 14:46:24     2025-12-11: Open=$69.43 High=$70.72 Low=$69.19 Close=$70.56 Volume=9134653
+2025/12/27 14:46:24     2025-12-12: Open=$70.95 High=$71.59 Low=$69.61 Close=$69.81 Volume=7937925
+2025/12/27 14:46:24     2025-12-15: Open=$70.76 High=$71.64 Low=$70.14 Close=$71.27 Volume=7993299
+2025/12/27 14:46:24     2025-12-16: Open=$71.48 High=$72.34 Low=$70.10 Close=$71.14 Volume=10443597
+2025/12/27 14:46:24     2025-12-17: Open=$70.94 High=$71.95 Low=$69.50 Close=$69.72 Volume=7222251
+2025/12/27 14:46:24     2025-12-18: Open=$70.82 High=$70.99 Low=$70.00 Close=$70.15 Volume=5988021
+2025/12/27 14:46:24     2025-12-19: Open=$70.24 High=$71.25 Low=$70.02 Close=$71.06 Volume=16154245
+2025/12/27 14:46:24     2025-12-22: Open=$71.50 High=$72.11 Low=$71.17 Close=$72.06 Volume=5141595
+2025/12/27 14:46:24     2025-12-23: Open=$71.79 High=$71.90 Low=$70.34 Close=$70.50 Volume=6050266
+2025/12/27 14:46:24     2025-12-24: Open=$70.51 High=$71.19 Low=$70.28 Close=$70.96 Volume=1821796
+2025/12/27 14:46:24     2025-12-26: Open=$70.83 High=$71.20 Low=$70.41 Close=$70.85 Volume=2892421
+2025/12/27 14:46:24 ⏱️  DAL processing time: 256.653583ms
+2025/12/27 14:46:24 
+[4/26] Processing GFS...
+2025/12/27 14:46:24   ⏱️  Metadata fetch: 131.057167ms
+2025/12/27 14:46:24   Name: GlobalFoundries Inc
+2025/12/27 14:46:24   Exchange: NASDAQ
+2025/12/27 14:46:24   Type: 
+2025/12/27 14:46:24   Metadata:
+{
+    "ticker": "GFS",
+    "name": "GlobalFoundries Inc",
+    "exchangeCode": "NASDAQ",
+    "assetType": "",
+    "startDate": "2021-10-28T00:00:00Z",
+    "endDate": "2025-12-26T00:00:00Z",
+    "description": "GlobalFoundries Inc"
+  }
+2025/12/27 14:46:24   ⏱️  Price fetch: 116.346167ms
+2025/12/27 14:46:24   Retrieved 20 price records
+2025/12/27 14:46:24   ⏱️  Kafka publish: 15.46225ms
+2025/12/27 14:46:24   ✅ Published 20 records to Kafka
+2025/12/27 14:46:24   Latest Close: $35.81 (Date: 2025-12-26)
+2025/12/27 14:46:24   Recent prices:
+2025/12/27 14:46:24     2025-11-28: Open=$35.27 High=$35.85 Low=$35.10 Close=$35.84 Volume=1313975
+2025/12/27 14:46:24     2025-12-01: Open=$35.37 High=$36.25 Low=$35.31 Close=$35.88 Volume=2654433
+2025/12/27 14:46:24     2025-12-02: Open=$35.96 High=$37.34 Low=$35.74 Close=$37.13 Volume=2689005
+2025/12/27 14:46:24     2025-12-03: Open=$37.10 High=$38.14 Low=$37.02 Close=$38.09 Volume=2108031
+2025/12/27 14:46:24     2025-12-04: Open=$37.95 High=$37.98 Low=$37.32 Close=$37.58 Volume=2069375
+2025/12/27 14:46:24     2025-12-05: Open=$38.00 High=$39.69 Low=$37.98 Close=$38.95 Volume=3391951
+2025/12/27 14:46:24     2025-12-08: Open=$39.35 High=$39.94 Low=$38.80 Close=$39.92 Volume=2983973
+2025/12/27 14:46:24     2025-12-09: Open=$39.78 High=$40.64 Low=$39.49 Close=$39.96 Volume=2534754
+2025/12/27 14:46:24     2025-12-10: Open=$39.84 High=$40.62 Low=$39.57 Close=$40.42 Volume=2648220
+2025/12/27 14:46:24     2025-12-11: Open=$40.08 High=$40.18 Low=$39.14 Close=$39.98 Volume=3636306
+2025/12/27 14:46:24     2025-12-12: Open=$39.95 High=$40.13 Low=$38.56 Close=$38.73 Volume=4228868
+2025/12/27 14:46:24     2025-12-15: Open=$39.16 High=$39.18 Low=$37.11 Close=$37.24 Volume=5225348
+2025/12/27 14:46:24     2025-12-16: Open=$36.95 High=$37.33 Low=$36.28 Close=$37.08 Volume=3466076
+2025/12/27 14:46:24     2025-12-17: Open=$37.05 High=$37.31 Low=$36.12 Close=$36.25 Volume=3405041
+2025/12/27 14:46:24     2025-12-18: Open=$36.83 High=$37.00 Low=$35.99 Close=$36.17 Volume=4097517
+2025/12/27 14:46:24     2025-12-19: Open=$36.15 High=$37.01 Low=$36.06 Close=$36.63 Volume=52580274
+2025/12/27 14:46:24     2025-12-22: Open=$36.74 High=$37.29 Low=$36.00 Close=$36.42 Volume=4704743
+2025/12/27 14:46:24     2025-12-23: Open=$36.28 High=$36.54 Low=$35.77 Close=$35.79 Volume=2832432
+2025/12/27 14:46:24     2025-12-24: Open=$35.91 High=$35.94 Low=$35.56 Close=$35.75 Volume=1013683
+2025/12/27 14:46:24     2025-12-26: Open=$35.90 High=$35.98 Low=$35.32 Close=$35.81 Volume=3039152
+2025/12/27 14:46:24 ⏱️  GFS processing time: 262.941042ms
+2025/12/27 14:46:24 
+[5/26] Processing MUB...
+2025/12/27 14:46:24   ⏱️  Metadata fetch: 118.951958ms
+2025/12/27 14:46:24   Name: ISHARES NATIONAL MUNI BOND ETF 
+2025/12/27 14:46:24   Exchange: NYSE ARCA
+2025/12/27 14:46:24   Type: 
+2025/12/27 14:46:24   Metadata:
+{
+    "ticker": "MUB",
+    "name": "ISHARES NATIONAL MUNI BOND ETF ",
+    "exchangeCode": "NYSE ARCA",
+    "assetType": "",
+    "startDate": "2007-09-10T00:00:00Z",
+    "endDate": "2025-12-26T00:00:00Z",
+    "description": "The Fund seeks to track the investment results of the ICE AMT-Free US National Municipal Index (the “Underlying Index”), which measures the performance of U.S. dollar denominated investment grade tax-exempt debt publicly issued in the U.S. domestic market by U.S. states and their political subdivisions. As of February 29, 2024, there were 23,383 issues in the Underlying Index. As of February 29, 2024, a significant portion of the Underlying Index is represented by municipal bonds. The components of the Underlying Index are likely to change over time.   The Underlying Index includes municipal bonds, the interest of which is exempt from Federal income taxes and not subject to alternative minimum tax. Each bond in the Underlying Index must have a rating of at least BBB- by Standard \u0026 Poor’s® Global Ratings, a subsidiary of S\u0026P Global, Baa3 by Moody’s Investors Service, Inc., or BBB- by Fitch Ratings, Inc. A bond must be rated by at least one of these three rating agencies in order to qualify for the Underlying Index, and the lowest rating will be used in determining if the bond is investment grade. Each bond in the Underlying Index must be a constituent of an offering where the original offering amount was at least $100 million and have a minimum par amount (i.e., currently outstanding face value) of $15 million. In addition, each bond must have a minimum remaining term to final maturity greater than or equal to one calendar month to be included in the Underlying Index. The Underlying Index is a market-value weighted index and is subject to a capping methodology that aims at reducing index concentration. The Underlying Index is rebalanced on the last calendar day of the month.  BFA uses an indexing approach to try to achieve the Fund’s investment objective. Unlike many investment   companies, the Fund does not try to “beat” the index it tracks and does not seek temporary defensive positions when markets decline or appear overvalued.  Indexing may eliminate the chance that the Fund will substantially outperform the Underlying Index but also may reduce some of the risks of active management, such as poor security selection. Indexing seeks to achieve lower costs and better after-tax performance by aiming to keep portfolio turnover low in comparison to actively managed investment companies.  BFA uses a representative sampling indexing strategy to manage the Fund. “Representative sampling” is an indexing strategy that involves investing in a representative sample of securities that collectively has an investment profile similar to that of an applicable underlying index. The securities selected are expected to have, in the aggregate, investment characteristics (based on factors such as market value and industry weightings), fundamental characteristics (such as return variability, duration (i.e., a security's price sensitivity to a change in interest rates), maturity or credit ratings and yield) and liquidity measures similar to those of an applicable underlying index. The Fund may or may not hold all of the securities in the Underlying Index.  The Fund will invest at least 80% of its assets in the component securities of the Underlying Index, and the Fund will invest at least 90% of its assets in fixed income securities of the types included in the Underlying Index that BFA believes will help the Fund track the Underlying Index. The Fund will invest no more than 10% of its assets in futures, options and swaps contracts   that BFA believes will help the Fund track the Underlying Index as well as in fixed income securities other than the types included in the Underlying Index, but which BFA believes will help the Fund track the Underlying Index. Cash and cash equivalent investments associated with a derivative position will be treated as part of that position for the purposes of calculating the percentage of investments included in the Underlying Index. The Fund will generally hold municipal bond securities issued by state and local municipalities whose interest payments are exempt from U.S. federal income taxes and the federal alternative minimum tax (“AMT”). As of the date of this Prospectus, interest that is exempt from U.S. federal income tax is also exempt from the federal Medicare contribution tax of 3.8% on “net investment income.” In addition, the Fund intends to invest any cash assets in one or more affiliated municipal money market funds, which may be advised by BFA or its affiliates. The Fund seeks to track the investment results of the Underlying Index before fees and expenses of the Fund.  The Fund may invest in shares of other iShares funds that provide substantially similar exposure to the securities in the Underlying Index. BFA will waive a portion of its management fees in an amount equal to the acquired fund fees and expenses, if any, attributable to the Fund's investment in other iShares funds.  The Underlying Index is sponsored by ICE Data Indices, LLC (the “Index Provider” or “IDI”), which is independent of the Fund and BFA. The Index Provider determines the composition and relative weightings of the securities in the Underlying Index and publishes   information regarding the market value of the Underlying Index.   Industry Concentration Policy. The Fund will concentrate its investments (i.e., hold 25% or more of its total assets) in a particular industry or group of industries to approximately the same extent that the Underlying Index is concentrated. For purposes of this limitation, securities of the U.S. government (including its agencies and instrumentalities), repurchase agreements collateralized by U.S. government securities, and securities of state or municipal governments and their political subdivisions are not considered to be issued by members of any industry."
+  }
+2025/12/27 14:46:24   ⏱️  Price fetch: 116.145625ms
+2025/12/27 14:46:24   Retrieved 20 price records
+2025/12/27 14:46:24   ⏱️  Kafka publish: 38.479792ms
+2025/12/27 14:46:24   ✅ Published 20 records to Kafka
+2025/12/27 14:46:24   Latest Close: $106.89 (Date: 2025-12-26)
+2025/12/27 14:46:24   Recent prices:
+2025/12/27 14:46:24     2025-11-28: Open=$107.32 High=$107.50 Low=$107.32 Close=$107.43 Volume=2748793
+2025/12/27 14:46:24     2025-12-01: Open=$106.87 High=$106.91 Low=$106.80 Close=$106.87 Volume=3424370
+2025/12/27 14:46:24     2025-12-02: Open=$106.87 High=$106.87 Low=$106.71 Close=$106.81 Volume=2706393
+2025/12/27 14:46:24     2025-12-03: Open=$106.86 High=$107.03 Low=$106.83 Close=$106.87 Volume=4043892
+2025/12/27 14:46:24     2025-12-04: Open=$106.78 High=$106.88 Low=$106.73 Close=$106.86 Volume=2995356
+2025/12/27 14:46:24     2025-12-05: Open=$106.85 High=$106.91 Low=$106.82 Close=$106.91 Volume=3249708
+2025/12/27 14:46:24     2025-12-08: Open=$106.86 High=$106.89 Low=$106.80 Close=$106.85 Volume=2655991
+2025/12/27 14:46:24     2025-12-09: Open=$106.94 High=$106.98 Low=$106.76 Close=$106.79 Volume=2983538
+2025/12/27 14:46:24     2025-12-10: Open=$106.78 High=$106.99 Low=$106.77 Close=$106.97 Volume=4505563
+2025/12/27 14:46:24     2025-12-11: Open=$107.01 High=$107.15 Low=$106.90 Close=$106.97 Volume=3353897
+2025/12/27 14:46:24     2025-12-12: Open=$106.78 High=$106.93 Low=$106.76 Close=$106.85 Volume=3220512
+2025/12/27 14:46:24     2025-12-15: Open=$106.99 High=$107.05 Low=$106.76 Close=$106.84 Volume=3690777
+2025/12/27 14:46:24     2025-12-16: Open=$106.79 High=$107.00 Low=$106.79 Close=$106.99 Volume=2899136
+2025/12/27 14:46:24     2025-12-17: Open=$106.91 High=$107.02 Low=$106.86 Close=$106.96 Volume=2847293
+2025/12/27 14:46:24     2025-12-18: Open=$107.14 High=$107.16 Low=$106.98 Close=$107.02 Volume=3062817
+2025/12/27 14:46:24     2025-12-19: Open=$106.67 High=$106.75 Low=$106.65 Close=$106.71 Volume=2995667
+2025/12/27 14:46:24     2025-12-22: Open=$106.71 High=$106.76 Low=$106.69 Close=$106.73 Volume=3058465
+2025/12/27 14:46:24     2025-12-23: Open=$106.59 High=$106.84 Low=$106.57 Close=$106.79 Volume=3407132
+2025/12/27 14:46:24     2025-12-24: Open=$106.80 High=$106.97 Low=$106.78 Close=$106.96 Volume=2426863
+2025/12/27 14:46:24     2025-12-26: Open=$106.95 High=$107.03 Low=$106.85 Close=$106.89 Volume=2952124
+2025/12/27 14:46:24 ⏱️  MUB processing time: 274.106959ms
+2025/12/27 14:46:24 
+[6/26] Processing ORCL...
+2025/12/27 14:46:25   ⏱️  Metadata fetch: 106.776291ms
+2025/12/27 14:46:25   Name: Oracle Corp
+2025/12/27 14:46:25   Exchange: NYSE
+2025/12/27 14:46:25   Type: 
+2025/12/27 14:46:25   Metadata:
+{
+    "ticker": "ORCL",
+    "name": "Oracle Corp",
+    "exchangeCode": "NYSE",
+    "assetType": "",
+    "startDate": "1986-03-12T00:00:00Z",
+    "endDate": "2025-12-26T00:00:00Z",
+    "description": "Oracle offers integrated suites of applications plus secure, autonomous infrastructure in the Oracle Cloud."
+  }
+2025/12/27 14:46:25   ⏱️  Price fetch: 134.412542ms
+2025/12/27 14:46:25   Retrieved 20 price records
+2025/12/27 14:46:25   ⏱️  Kafka publish: 16.088709ms
+2025/12/27 14:46:25   ✅ Published 20 records to Kafka
+2025/12/27 14:46:25   Latest Close: $197.99 (Date: 2025-12-26)
+2025/12/27 14:46:25   Recent prices:
+2025/12/27 14:46:25     2025-11-28: Open=$199.51 High=$202.34 Low=$197.61 Close=$201.95 Volume=13848479
+2025/12/27 14:46:25     2025-12-01: Open=$200.50 High=$203.50 Low=$196.70 Close=$200.94 Volume=13461204
+2025/12/27 14:46:25     2025-12-02: Open=$205.14 High=$209.70 Low=$200.00 Close=$201.10 Volume=19664471
+2025/12/27 14:46:25     2025-12-03: Open=$200.33 High=$207.92 Low=$199.40 Close=$207.73 Volume=19060528
+2025/12/27 14:46:25     2025-12-04: Open=$207.86 High=$215.41 Low=$206.31 Close=$214.33 Volume=23316937
+2025/12/27 14:46:25     2025-12-05: Open=$219.00 High=$219.50 Low=$213.62 Close=$217.58 Volume=24208687
+2025/12/27 14:46:25     2025-12-08: Open=$221.34 High=$224.75 Low=$216.91 Close=$220.54 Volume=24415735
+2025/12/27 14:46:25     2025-12-09: Open=$220.03 High=$222.62 Low=$218.28 Close=$221.53 Volume=17215352
+2025/12/27 14:46:25     2025-12-10: Open=$221.80 High=$225.32 Low=$217.58 Close=$223.01 Volume=47927993
+2025/12/27 14:46:25     2025-12-11: Open=$190.62 High=$201.99 Low=$186.23 Close=$198.85 Volume=100612691
+2025/12/27 14:46:25     2025-12-12: Open=$196.37 High=$197.85 Low=$185.98 Close=$189.97 Volume=55201644
+2025/12/27 14:46:25     2025-12-15: Open=$188.29 High=$188.97 Low=$181.40 Close=$184.92 Volume=43897509
+2025/12/27 14:46:25     2025-12-16: Open=$184.70 High=$189.80 Low=$184.49 Close=$188.65 Volume=32433525
+2025/12/27 14:46:25     2025-12-17: Open=$183.31 High=$186.50 Low=$177.07 Close=$178.46 Volume=50222018
+2025/12/27 14:46:25     2025-12-18: Open=$182.72 High=$184.76 Low=$178.58 Close=$180.03 Volume=36297285
+2025/12/27 14:46:25     2025-12-19: Open=$188.38 High=$195.12 Low=$188.12 Close=$191.97 Volume=77008550
+2025/12/27 14:46:25     2025-12-22: Open=$196.82 High=$198.80 Low=$192.83 Close=$198.38 Volume=27148017
+2025/12/27 14:46:25     2025-12-23: Open=$196.43 High=$197.20 Low=$192.19 Close=$195.34 Volume=18301588
+2025/12/27 14:46:25     2025-12-24: Open=$195.00 High=$198.28 Low=$194.42 Close=$197.49 Volume=9282733
+2025/12/27 14:46:25     2025-12-26: Open=$198.06 High=$200.37 Low=$196.11 Close=$197.99 Volume=11262030
+2025/12/27 14:46:25 ⏱️  ORCL processing time: 257.548833ms
+2025/12/27 14:46:25 
+[7/26] Processing IBM...
+2025/12/27 14:46:25   ⏱️  Metadata fetch: 119.669208ms
+2025/12/27 14:46:25   Name: International Business Machines Corp
+2025/12/27 14:46:25   Exchange: NYSE
+2025/12/27 14:46:25   Type: 
+2025/12/27 14:46:25   Metadata:
+{
+    "ticker": "IBM",
+    "name": "International Business Machines Corp",
+    "exchangeCode": "NYSE",
+    "assetType": "",
+    "startDate": "1962-01-02T00:00:00Z",
+    "endDate": "2025-12-26T00:00:00Z",
+    "description": "International Business Machines Corporation (IBM) is an information technology (IT) company. IBM operates in five segments: Global Technology Services (GTS), Global Business Services (GBS), Software, Systems and Technology and Global Financing. GTS primarily provides IT infrastructure services and business process services. GBS provides professional services and application management services. Software consists primarily of middleware and operating systems software. Systems and Technology provides clients with business solutions requiring advanced computing power and storage capabilities. In October 2013, International Business Machines Corporation acquired Xtify Inc. In October 2013, the Company announced that it has completed the acquisition of The Now Factory, a privately held provider of analytics software that helps communications service providers (CSPs) deliver better customer experiences and drive new revenue opportunities."
+  }
+2025/12/27 14:46:25   ⏱️  Price fetch: 122.221708ms
+2025/12/27 14:46:25   Retrieved 20 price records
+2025/12/27 14:46:25   ⏱️  Kafka publish: 84.539583ms
+2025/12/27 14:46:25   ✅ Published 20 records to Kafka
+2025/12/27 14:46:25   Latest Close: $305.09 (Date: 2025-12-26)
+2025/12/27 14:46:25   Recent prices:
+2025/12/27 14:46:25     2025-11-28: Open=$304.06 High=$309.18 Low=$303.60 Close=$308.58 Volume=1689031
+2025/12/27 14:46:25     2025-12-01: Open=$306.50 High=$307.12 Low=$302.80 Close=$305.67 Volume=3166555
+2025/12/27 14:46:25     2025-12-02: Open=$307.00 High=$310.47 Low=$301.57 Close=$301.78 Volume=4261100
+2025/12/27 14:46:25     2025-12-03: Open=$302.88 High=$303.97 Low=$298.90 Close=$302.62 Volume=3953390
+2025/12/27 14:46:25     2025-12-04: Open=$302.88 High=$309.61 Low=$302.54 Close=$307.99 Volume=2962463
+2025/12/27 14:46:25     2025-12-05: Open=$308.59 High=$311.83 Low=$307.18 Close=$307.94 Volume=2344667
+2025/12/27 14:46:25     2025-12-08: Open=$309.62 High=$315.35 Low=$307.95 Close=$309.18 Volume=3615794
+2025/12/27 14:46:25     2025-12-09: Open=$309.63 High=$313.97 Low=$308.75 Close=$310.48 Volume=2914275
+2025/12/27 14:46:25     2025-12-10: Open=$310.23 High=$314.69 Low=$306.65 Close=$312.67 Volume=3411524
+2025/12/27 14:46:25     2025-12-11: Open=$312.00 High=$313.44 Low=$308.40 Close=$310.74 Volume=2755749
+2025/12/27 14:46:25     2025-12-12: Open=$310.57 High=$311.05 Low=$303.33 Close=$309.24 Volume=2953374
+2025/12/27 14:46:25     2025-12-15: Open=$308.99 High=$311.36 Low=$306.35 Close=$308.66 Volume=3566732
+2025/12/27 14:46:25     2025-12-16: Open=$307.31 High=$307.38 Low=$300.42 Close=$303.18 Volume=3366878
+2025/12/27 14:46:25     2025-12-17: Open=$303.79 High=$306.25 Low=$303.08 Close=$303.32 Volume=3130954
+2025/12/27 14:46:25     2025-12-18: Open=$303.15 High=$304.45 Low=$295.70 Close=$300.45 Volume=5411669
+2025/12/27 14:46:25     2025-12-19: Open=$300.35 High=$306.86 Low=$299.10 Close=$300.98 Volume=11031341
+2025/12/27 14:46:25     2025-12-22: Open=$301.03 High=$303.18 Low=$298.32 Close=$302.79 Volume=2612100
+2025/12/27 14:46:25     2025-12-23: Open=$301.34 High=$305.13 Low=$300.65 Close=$303.78 Volume=2923037
+2025/12/27 14:46:25     2025-12-24: Open=$303.76 High=$305.15 Low=$302.30 Close=$304.56 Volume=1210642
+2025/12/27 14:46:25     2025-12-26: Open=$304.69 High=$305.75 Low=$303.67 Close=$305.09 Volume=2814732
+2025/12/27 14:46:25 ⏱️  IBM processing time: 326.792917ms
+2025/12/27 14:46:25 
+[8/26] Processing INTC...
+2025/12/27 14:46:25   ⏱️  Metadata fetch: 118.014125ms
+2025/12/27 14:46:25   Name: Intel Corp
+2025/12/27 14:46:25   Exchange: NASDAQ
+2025/12/27 14:46:25   Type: 
+2025/12/27 14:46:25   Metadata:
+{
+    "ticker": "INTC",
+    "name": "Intel Corp",
+    "exchangeCode": "NASDAQ",
+    "assetType": "",
+    "startDate": "1980-03-17T00:00:00Z",
+    "endDate": "2025-12-26T00:00:00Z",
+    "description": "Intel is an industry leader, creating world-changing technology that enables global progress and enriches lives. Inspired by Moore’s Law, we continuously work to advance the design and manufacturing of semiconductors to help address our customers’ greatest challenges. By embedding intelligence in the cloud, network, edge and every kind of computing device, we unleash the potential of data to transform business and society for the better."
+  }
+2025/12/27 14:46:25   ⏱️  Price fetch: 139.454708ms
+2025/12/27 14:46:25   Retrieved 20 price records
+2025/12/27 14:46:25   ⏱️  Kafka publish: 49.277042ms
+2025/12/27 14:46:25   ✅ Published 20 records to Kafka
+2025/12/27 14:46:25   Latest Close: $36.20 (Date: 2025-12-26)
+2025/12/27 14:46:25   Recent prices:
+2025/12/27 14:46:25     2025-11-28: Open=$37.40 High=$40.59 Low=$37.34 Close=$40.56 Volume=95799486
+2025/12/27 14:46:25     2025-12-01: Open=$39.86 High=$40.38 Low=$39.60 Close=$40.01 Volume=74534896
+2025/12/27 14:46:25     2025-12-02: Open=$40.47 High=$43.68 Low=$40.05 Close=$43.47 Volume=167205815
+2025/12/27 14:46:25     2025-12-03: Open=$43.38 High=$44.02 Low=$42.51 Close=$43.76 Volume=91957186
+2025/12/27 14:46:25     2025-12-04: Open=$43.26 High=$43.28 Low=$40.14 Close=$40.50 Volume=107850164
+2025/12/27 14:46:25     2025-12-05: Open=$41.16 High=$42.83 Low=$41.15 Close=$41.41 Volume=103042015
+2025/12/27 14:46:25     2025-12-08: Open=$41.94 High=$42.12 Low=$39.70 Close=$40.30 Volume=92349107
+2025/12/27 14:46:25     2025-12-09: Open=$40.73 High=$41.26 Low=$40.03 Close=$40.50 Volume=58828100
+2025/12/27 14:46:25     2025-12-10: Open=$40.11 High=$40.99 Low=$38.89 Close=$40.78 Volume=75974890
+2025/12/27 14:46:25     2025-12-11: Open=$40.07 High=$40.19 Low=$39.08 Close=$39.51 Volume=59096759
+2025/12/27 14:46:25     2025-12-12: Open=$39.24 High=$40.03 Low=$37.62 Close=$37.81 Volume=87784470
+2025/12/27 14:46:25     2025-12-15: Open=$38.33 High=$38.48 Low=$37.32 Close=$37.51 Volume=60898465
+2025/12/27 14:46:25     2025-12-16: Open=$37.58 High=$37.96 Low=$36.92 Close=$37.31 Volume=50490257
+2025/12/27 14:46:25     2025-12-17: Open=$37.59 High=$37.84 Low=$35.97 Close=$36.05 Volume=54791951
+2025/12/27 14:46:25     2025-12-18: Open=$37.38 High=$37.48 Low=$35.67 Close=$36.28 Volume=69468393
+2025/12/27 14:46:25     2025-12-19: Open=$36.48 High=$37.58 Low=$36.44 Close=$36.82 Volume=163221251
+2025/12/27 14:46:25     2025-12-22: Open=$37.89 High=$37.90 Low=$36.29 Close=$36.37 Volume=51685394
+2025/12/27 14:46:25     2025-12-23: Open=$36.24 High=$36.80 Low=$36.03 Close=$36.35 Volume=35957954
+2025/12/27 14:46:25     2025-12-24: Open=$35.17 High=$36.17 Low=$34.95 Close=$36.16 Volume=37443756
+2025/12/27 14:46:25     2025-12-26: Open=$36.17 High=$36.49 Low=$35.85 Close=$36.20 Volume=28779396
+2025/12/27 14:46:25 ⏱️  INTC processing time: 307.055083ms
+2025/12/27 14:46:25 
+[9/26] Processing TSLA...
+2025/12/27 14:46:25   ⏱️  Metadata fetch: 118.46525ms
+2025/12/27 14:46:25   Name: Tesla Inc
+2025/12/27 14:46:25   Exchange: NASDAQ
+2025/12/27 14:46:25   Type: 
+2025/12/27 14:46:25   Metadata:
+{
+    "ticker": "TSLA",
+    "name": "Tesla Inc",
+    "exchangeCode": "NASDAQ",
+    "assetType": "",
+    "startDate": "2010-06-29T00:00:00Z",
+    "endDate": "2025-12-26T00:00:00Z",
+    "description": "Tesla Motors, Inc. (Tesla) designs, develops, manufactures and sells electric vehicles and advanced electric vehicle powertrain components. Tesla owns its sales and service network. The Company is engaged in commercially producing a federally-compliant electric vehicle, the Tesla Roadster. addition to developing its Model S and future vehicle manufacturing capabilities at the Tesla Factory, the Company is designing, developing and manufacturing lithium-ion battery packs, electric motors, gearboxes and components both for its vehicles and for its original equipment manufacturer customers. These activities occur at its electric powertrain manufacturing facility in Palo Alto, California and at the Tesla Factory. The Company provides services for the development of electric powertrain components and sells electric powertrain components to other automotive manufacturers."
+  }
+2025/12/27 14:46:26   ⏱️  Price fetch: 118.038125ms
+2025/12/27 14:46:26   Retrieved 20 price records
+2025/12/27 14:46:26   ⏱️  Kafka publish: 68.795375ms
+2025/12/27 14:46:26   ✅ Published 20 records to Kafka
+2025/12/27 14:46:26   Latest Close: $475.19 (Date: 2025-12-26)
+2025/12/27 14:46:26   Recent prices:
+2025/12/27 14:46:26     2025-11-28: Open=$426.59 High=$432.93 Low=$426.20 Close=$430.17 Volume=36252861
+2025/12/27 14:46:26     2025-12-01: Open=$425.32 High=$433.66 Low=$425.29 Close=$430.14 Volume=57463552
+2025/12/27 14:46:26     2025-12-02: Open=$430.81 High=$436.80 Low=$422.12 Close=$429.24 Volume=69336626
+2025/12/27 14:46:26     2025-12-03: Open=$432.10 High=$447.92 Low=$431.11 Close=$446.74 Volume=87482964
+2025/12/27 14:46:26     2025-12-04: Open=$449.94 High=$454.63 Low=$445.39 Close=$454.53 Volume=71906488
+2025/12/27 14:46:26     2025-12-05: Open=$453.03 High=$458.87 Low=$451.66 Close=$455.00 Volume=56427522
+2025/12/27 14:46:26     2025-12-08: Open=$447.44 High=$449.75 Low=$435.25 Close=$439.58 Volume=68386756
+2025/12/27 14:46:26     2025-12-09: Open=$437.54 High=$452.39 Low=$435.70 Close=$445.17 Volume=62014951
+2025/12/27 14:46:26     2025-12-10: Open=$446.06 High=$456.88 Low=$443.61 Close=$451.45 Volume=63257475
+2025/12/27 14:46:26     2025-12-11: Open=$448.94 High=$449.27 Low=$440.33 Close=$446.89 Volume=55979492
+2025/12/27 14:46:26     2025-12-12: Open=$448.09 High=$463.01 Low=$441.67 Close=$458.96 Volume=95656749
+2025/12/27 14:46:26     2025-12-15: Open=$469.44 High=$481.77 Low=$467.66 Close=$475.31 Volume=114542204
+2025/12/27 14:46:26     2025-12-16: Open=$472.21 High=$491.50 Low=$465.83 Close=$489.88 Volume=107608075
+2025/12/27 14:46:26     2025-12-17: Open=$488.22 High=$495.28 Low=$466.20 Close=$467.26 Volume=106490405
+2025/12/27 14:46:26     2025-12-18: Open=$478.16 High=$490.86 Low=$473.12 Close=$483.37 Volume=95168446
+2025/12/27 14:46:26     2025-12-19: Open=$488.12 High=$490.49 Low=$474.72 Close=$481.20 Volume=103305424
+2025/12/27 14:46:26     2025-12-22: Open=$489.88 High=$498.83 Low=$485.33 Close=$488.73 Volume=86916066
+2025/12/27 14:46:26     2025-12-23: Open=$489.39 High=$491.97 Low=$482.84 Close=$485.56 Volume=58223633
+2025/12/27 14:46:26     2025-12-24: Open=$488.48 High=$490.90 Low=$476.80 Close=$485.40 Volume=41285429
+2025/12/27 14:46:26     2025-12-26: Open=$485.23 High=$489.09 Low=$473.82 Close=$475.19 Volume=58780659
+2025/12/27 14:46:26 ⏱️  TSLA processing time: 305.64925ms
+2025/12/27 14:46:26 
+[10/26] Processing PDI...
+2025/12/27 14:46:26   ⏱️  Metadata fetch: 119.675041ms
+2025/12/27 14:46:26   Name: PIMCO Dynamic Income Fund
+2025/12/27 14:46:26   Exchange: NYSE
+2025/12/27 14:46:26   Type: 
+2025/12/27 14:46:26   Metadata:
+{
+    "ticker": "PDI",
+    "name": "PIMCO Dynamic Income Fund",
+    "exchangeCode": "NYSE",
+    "assetType": "",
+    "startDate": "2012-05-25T00:00:00Z",
+    "endDate": "2025-12-26T00:00:00Z",
+    "description": "PIMCO Dynamic Income Fund (the Fund) is a non-diversified, closed-end management investment company. The Fund's investment objective is to seek current income and capital appreciation as a secondary objective. The Fund seeks to achieve its investment objectives to produce total return for shareholders by utilizing a dynamic asset allocation strategy among multiple fixed-income sectors, including below investment grade (commonly referred to as high yield securities or junk bonds), mortgage-related and any other asset-backed securities, government and sovereign debt, corporate debt (including fixed and floating-rate bonds, bank loans and convertible securities), taxable municipal bonds and other income producing securities of United States and foreign issuers, including emerging market issuers. The Fund invests at least 25% of its total assets in privately-issued mortgage-related securities. Allianz Global Investors Fund Management LLC is the investment manager of the Fund."
+  }
+2025/12/27 14:46:26   ⏱️  Price fetch: 131.61725ms
+2025/12/27 14:46:26   Retrieved 20 price records
+2025/12/27 14:46:26   ⏱️  Kafka publish: 54.8705ms
+2025/12/27 14:46:26   ✅ Published 20 records to Kafka
+2025/12/27 14:46:26   Latest Close: $17.73 (Date: 2025-12-26)
+2025/12/27 14:46:26   Recent prices:
+2025/12/27 14:46:26     2025-11-28: Open=$18.05 High=$18.08 Low=$17.98 Close=$18.07 Volume=1646596
+2025/12/27 14:46:26     2025-12-01: Open=$18.03 High=$18.12 Low=$17.96 Close=$18.01 Volume=2920657
+2025/12/27 14:46:26     2025-12-02: Open=$18.03 High=$18.10 Low=$17.96 Close=$18.09 Volume=2924136
+2025/12/27 14:46:26     2025-12-03: Open=$18.10 High=$18.11 Low=$18.07 Close=$18.09 Volume=1864883
+2025/12/27 14:46:26     2025-12-04: Open=$18.10 High=$18.13 Low=$18.08 Close=$18.11 Volume=1942810
+2025/12/27 14:46:26     2025-12-05: Open=$18.13 High=$18.18 Low=$18.07 Close=$18.07 Volume=2714896
+2025/12/27 14:46:26     2025-12-08: Open=$18.08 High=$18.08 Low=$17.93 Close=$18.05 Volume=2558363
+2025/12/27 14:46:26     2025-12-09: Open=$18.06 High=$18.07 Low=$17.99 Close=$17.99 Volume=2132411
+2025/12/27 14:46:26     2025-12-10: Open=$18.00 High=$18.03 Low=$17.91 Close=$17.98 Volume=2660899
+2025/12/27 14:46:26     2025-12-11: Open=$17.75 High=$17.80 Low=$17.69 Close=$17.75 Volume=3107776
+2025/12/27 14:46:26     2025-12-12: Open=$17.73 High=$17.75 Low=$17.60 Close=$17.70 Volume=3323503
+2025/12/27 14:46:26     2025-12-15: Open=$17.72 High=$17.75 Low=$17.64 Close=$17.70 Volume=3927614
+2025/12/27 14:46:26     2025-12-16: Open=$17.68 High=$17.70 Low=$17.61 Close=$17.67 Volume=3732539
+2025/12/27 14:46:26     2025-12-17: Open=$17.71 High=$17.74 Low=$17.56 Close=$17.66 Volume=3266597
+2025/12/27 14:46:26     2025-12-18: Open=$17.67 High=$17.72 Low=$17.66 Close=$17.69 Volume=3067679
+2025/12/27 14:46:26     2025-12-19: Open=$17.66 High=$17.74 Low=$17.66 Close=$17.71 Volume=2749432
+2025/12/27 14:46:26     2025-12-22: Open=$17.74 High=$17.82 Low=$17.70 Close=$17.73 Volume=4061824
+2025/12/27 14:46:26     2025-12-23: Open=$17.74 High=$17.75 Low=$17.66 Close=$17.69 Volume=3134159
+2025/12/27 14:46:26     2025-12-24: Open=$17.69 High=$17.73 Low=$17.67 Close=$17.72 Volume=1990581
+2025/12/27 14:46:26     2025-12-26: Open=$17.73 High=$17.76 Low=$17.67 Close=$17.73 Volume=2253299
+2025/12/27 14:46:26 ⏱️  PDI processing time: 306.558292ms
+2025/12/27 14:46:26 
+[11/26] Processing IVLU...
+2025/12/27 14:46:26   ⏱️  Metadata fetch: 120.488541ms
+2025/12/27 14:46:26   Name: ISHARES MSCI INTL VALUE FACTOR ETF 
+2025/12/27 14:46:26   Exchange: NYSE ARCA
+2025/12/27 14:46:26   Type: 
+2025/12/27 14:46:26   Metadata:
+{
+    "ticker": "IVLU",
+    "name": "ISHARES MSCI INTL VALUE FACTOR ETF ",
+    "exchangeCode": "NYSE ARCA",
+    "assetType": "",
+    "startDate": "2015-07-15T00:00:00Z",
+    "endDate": "2025-12-26T00:00:00Z",
+    "description": "The Fund seeks to track the investment results of the MSCI World ex USA Enhanced Value Index (the “Underlying Index”), which is based on a traditional market capitalization-weighted parent index, the MSCI World ex USA Index (the “Parent Index”). The Parent Index includes equity securities in approximately the top 85% of equity market capitalization in developed market countries, as defined by MSCI Inc. (the “Index Provider” or “MSCI”), excluding the U.S. The Underlying Index is designed to represent the performance of securities that exhibit higher value style characteristics relative to their peers within the corresponding Global Industry Classification Standard (GICS®) sector.    The value style characteristics for index construction are defined by the Index Provider using three accounting variables based on publicly reported financial data: price-to-book value, price-to-forward earnings and enterprise value-to-cash flow from operations. The Index Provider calculates a “value score” based on these three variables and assigns weights by multiplying a component's value score by its market capitalization. Weights in the Underlying Index are next normalized so that sectors in the Underlying Index represent approximately the same weight as in the Parent Index.    MSCI uses an algorithm to determine the number of components in the Underlying Index based on the number of constituents in the Parent Index. The number of components is evaluated semi-annually.  As of July 31, 2024, the Underlying Index consisted of securities from 350 companies in the following 21 countries or regions: Australia, Austria, Belgium, Canada, Denmark, Finland, France, Germany, Hong Kong, Ireland, Israel, Italy, Japan, the Netherlands, Norway, Portugal, Singapore, Spain, Sweden, Switzerland and the United Kingdom (the “U.K.”). The Underlying Index includes large- and mid-capitalization companies and may change over time. As of July 31, 2024, a significant portion of the Underlying Index is represented by securities of companies in the financials and industrials industries or sectors. The components of the Underlying Index are likely to change over time.  BFA uses an indexing approach to try to achieve the Fund’s investment objective. Unlike many investment companies, the Fund does not try to “beat” the index it tracks and does not seek temporary defensive positions when markets decline or appear overvalued.  Indexing may eliminate the chance that the Fund will substantially outperform the Underlying Index but also may reduce some of the risks of active management, such as poor security selection. Indexing seeks to achieve lower costs and better after-tax performance by aiming to keep portfolio turnover low in comparison to actively managed investment companies.  BFA uses a representative sampling indexing strategy to manage the Fund. “Representative sampling” is an indexing strategy that involves investing in a representative sample of securities that collectively has an investment profile similar to that of an applicable underlying index. The securities selected are expected to have, in the aggregate, investment characteristics (based on factors such as market capitalization and industry weightings), fundamental characteristics (such as return variability and yield) and liquidity measures similar to those of an applicable underlying index. The Fund may or may not hold all of the securities in the Underlying Index.  The Fund generally will invest at least 80% of its assets in the component securities of its Underlying Index and in investments that have economic characteristics that are substantially identical to the component securities of its Underlying Index (i.e., depositary receipts representing securities of the Underlying Index) and may invest up to 20% of its assets in certain futures, options and swap contracts, cash and cash equivalents, including shares of money market funds advised by BFA or its affiliates, as well as in securities not included in the Underlying Index, but which BFA believes will help the Fund track the Underlying Index. Cash and cash equivalent investments associated with a derivative position will be treated as part of that position for the purposes of calculating the percentage of investments included in the Underlying Index. The Fund seeks to track the investment results of the Underlying Index before fees and expenses of the Fund.  The Fund may lend securities representing up to one-third of the value of the Fund's total assets (including the value of any collateral received).  The Underlying Index and Parent Index are sponsored by MSCI, which is independent of the Fund and BFA. The Index Provider determines the composition and relative weightings of the securities in the Underlying Index and Parent Index and publishes information regarding the market value of the Underlying Index and Parent Index.   Industry Concentration Policy. The Fund will concentrate its investments (i.e., hold 25% or more of its total assets) in a particular industry or group of industries to approximately the same extent that the Underlying Index is concentrated. For purposes of this limitation, securities of the U.S. government (including its agencies and instrumentalities) and repurchase agreements collateralized by U.S. government securities are not considered to be issued by members of any industry."
+  }
+2025/12/27 14:46:26   ⏱️  Price fetch: 126.294541ms
+2025/12/27 14:46:26   Retrieved 20 price records
+2025/12/27 14:46:26   ⏱️  Kafka publish: 64.606875ms
+2025/12/27 14:46:26   ✅ Published 20 records to Kafka
+2025/12/27 14:46:26   Latest Close: $38.24 (Date: 2025-12-26)
+2025/12/27 14:46:26   Recent prices:
+2025/12/27 14:46:26     2025-11-28: Open=$37.07 High=$37.22 Low=$37.03 Close=$37.19 Volume=310198
+2025/12/27 14:46:26     2025-12-01: Open=$37.21 High=$37.30 Low=$37.11 Close=$37.13 Volume=833318
+2025/12/27 14:46:26     2025-12-02: Open=$37.38 High=$37.39 Low=$37.23 Close=$37.36 Volume=577616
+2025/12/27 14:46:26     2025-12-03: Open=$37.31 High=$37.48 Low=$37.28 Close=$37.43 Volume=584704
+2025/12/27 14:46:26     2025-12-04: Open=$37.73 High=$37.76 Low=$37.59 Close=$37.65 Volume=722872
+2025/12/27 14:46:26     2025-12-05: Open=$37.70 High=$37.76 Low=$37.53 Close=$37.57 Volume=505566
+2025/12/27 14:46:26     2025-12-08: Open=$37.66 High=$37.66 Low=$37.49 Close=$37.54 Volume=1465645
+2025/12/27 14:46:26     2025-12-09: Open=$37.67 High=$37.75 Low=$37.56 Close=$37.59 Volume=781844
+2025/12/27 14:46:26     2025-12-10: Open=$37.73 High=$38.13 Low=$37.72 Close=$38.07 Volume=758852
+2025/12/27 14:46:26     2025-12-11: Open=$38.32 High=$38.55 Low=$38.25 Close=$38.49 Volume=660020
+2025/12/27 14:46:26     2025-12-12: Open=$38.51 High=$38.54 Low=$38.16 Close=$38.28 Volume=870167
+2025/12/27 14:46:26     2025-12-15: Open=$38.72 High=$38.72 Low=$38.51 Close=$38.64 Volume=661270
+2025/12/27 14:46:26     2025-12-16: Open=$37.85 High=$37.85 Low=$37.57 Close=$37.63 Volume=859410
+2025/12/27 14:46:26     2025-12-17: Open=$37.61 High=$37.72 Low=$37.49 Close=$37.50 Volume=810011
+2025/12/27 14:46:26     2025-12-18: Open=$37.69 High=$37.80 Low=$37.53 Close=$37.63 Volume=1067878
+2025/12/27 14:46:26     2025-12-19: Open=$37.81 High=$37.98 Low=$37.81 Close=$37.86 Volume=850882
+2025/12/27 14:46:26     2025-12-22: Open=$37.86 High=$37.98 Low=$37.80 Close=$37.95 Volume=762092
+2025/12/27 14:46:26     2025-12-23: Open=$38.13 High=$38.19 Low=$38.10 Close=$38.18 Volume=1021444
+2025/12/27 14:46:26     2025-12-24: Open=$38.18 High=$38.21 Low=$38.12 Close=$38.18 Volume=455532
+2025/12/27 14:46:26     2025-12-26: Open=$38.19 High=$38.25 Low=$38.13 Close=$38.24 Volume=573970
+2025/12/27 14:46:26 ⏱️  IVLU processing time: 311.73025ms
+2025/12/27 14:46:26 
+[12/26] Processing CEG...
+2025/12/27 14:46:26   ⏱️  Metadata fetch: 121.363666ms
+2025/12/27 14:46:26   Name: Constellation Energy Corporation
+2025/12/27 14:46:26   Exchange: NASDAQ
+2025/12/27 14:46:26   Type: 
+2025/12/27 14:46:26   Metadata:
+{
+    "ticker": "CEG",
+    "name": "Constellation Energy Corporation",
+    "exchangeCode": "NASDAQ",
+    "assetType": "",
+    "startDate": "2022-02-02T00:00:00Z",
+    "endDate": "2025-12-26T00:00:00Z",
+    "description": "Constellation Energy Corporation"
+  }
+2025/12/27 14:46:27   ⏱️  Price fetch: 136.325209ms
+2025/12/27 14:46:27   Retrieved 20 price records
+2025/12/27 14:46:27   ⏱️  Kafka publish: 14.317208ms
+2025/12/27 14:46:27   ✅ Published 20 records to Kafka
+2025/12/27 14:46:27   Latest Close: $360.46 (Date: 2025-12-26)
+2025/12/27 14:46:27   Recent prices:
+2025/12/27 14:46:27     2025-11-28: Open=$362.00 High=$366.31 Low=$359.60 Close=$364.36 Volume=1072967
+2025/12/27 14:46:27     2025-12-01: Open=$359.33 High=$361.29 Low=$354.00 Close=$359.05 Volume=2012469
+2025/12/27 14:46:27     2025-12-02: Open=$362.54 High=$368.71 Low=$358.94 Close=$363.67 Volume=1973995
+2025/12/27 14:46:27     2025-12-03: Open=$361.19 High=$365.47 Low=$355.21 Close=$361.26 Volume=1559515
+2025/12/27 14:46:27     2025-12-04: Open=$360.98 High=$374.45 Low=$358.50 Close=$368.62 Volume=2029840
+2025/12/27 14:46:27     2025-12-05: Open=$369.17 High=$370.07 Low=$357.12 Close=$359.82 Volume=2018171
+2025/12/27 14:46:27     2025-12-08: Open=$362.76 High=$364.25 Low=$354.00 Close=$357.67 Volume=1596160
+2025/12/27 14:46:27     2025-12-09: Open=$356.20 High=$364.66 Low=$354.01 Close=$359.15 Volume=1354428
+2025/12/27 14:46:27     2025-12-10: Open=$358.55 High=$363.52 Low=$346.40 Close=$362.07 Volume=2382191
+2025/12/27 14:46:27     2025-12-11: Open=$360.75 High=$380.00 Low=$354.34 Close=$378.60 Volume=2530253
+2025/12/27 14:46:27     2025-12-12: Open=$379.00 High=$380.78 Low=$351.22 Close=$351.98 Volume=3778565
+2025/12/27 14:46:27     2025-12-15: Open=$356.65 High=$360.96 Low=$350.67 Close=$357.14 Volume=2628771
+2025/12/27 14:46:27     2025-12-16: Open=$356.06 High=$368.18 Low=$350.33 Close=$365.62 Volume=2496791
+2025/12/27 14:46:27     2025-12-17: Open=$368.51 High=$372.00 Low=$334.18 Close=$340.97 Volume=4597994
+2025/12/27 14:46:27     2025-12-18: Open=$351.99 High=$371.24 Low=$348.78 Close=$361.05 Volume=3773191
+2025/12/27 14:46:27     2025-12-19: Open=$361.20 High=$368.64 Low=$354.19 Close=$355.40 Volume=5429540
+2025/12/27 14:46:27     2025-12-22: Open=$363.27 High=$363.95 Low=$355.40 Close=$357.81 Volume=1390333
+2025/12/27 14:46:27     2025-12-23: Open=$353.14 High=$364.31 Low=$353.00 Close=$361.33 Volume=1404308
+2025/12/27 14:46:27     2025-12-24: Open=$360.62 High=$364.56 Low=$359.00 Close=$363.95 Volume=628357
+2025/12/27 14:46:27     2025-12-26: Open=$363.24 High=$363.35 Low=$358.40 Close=$360.46 Volume=758517
+2025/12/27 14:46:27 ⏱️  CEG processing time: 272.35425ms
+2025/12/27 14:46:27 
+[13/26] Processing D...
+2025/12/27 14:46:27   ⏱️  Metadata fetch: 109.264ms
+2025/12/27 14:46:27   Name: Dominion Energy Inc
+2025/12/27 14:46:27   Exchange: NYSE
+2025/12/27 14:46:27   Type: 
+2025/12/27 14:46:27   Metadata:
+{
+    "ticker": "D",
+    "name": "Dominion Energy Inc",
+    "exchangeCode": "NYSE",
+    "assetType": "",
+    "startDate": "1984-10-03T00:00:00Z",
+    "endDate": "2025-12-26T00:00:00Z",
+    "description": "Dominion Resources, Inc. (Dominion), is a producer and transporter of energy. The Company is a provider of electricity, natural gas and related services to customers primarily in the eastern region of the United States Dominion's portfolio of assets includes approximately 27,500 megawatts of generating capacity, 6,300 miles of electric transmission lines, 56,900 miles of electric distribution lines, 11,000 miles of natural gas transmission, gathering and storage pipeline and 21,800 miles of gas distribution pipeline, exclusive of service lines of two inches in diameter or less. Dominion also operates one of the underground natural gas storage systems, with approximately 947 billion cubic feet of storage capacity, and serves nearly six million utility and retail energy customers in 15 states. In July 2013, Dominion Resources Inc acquired three solar-power development projects near Indianapolis, Ind., from Sunrise Energy Ventures."
+  }
+2025/12/27 14:46:27   ⏱️  Price fetch: 143.842583ms
+2025/12/27 14:46:27   Retrieved 20 price records
+2025/12/27 14:46:27   ⏱️  Kafka publish: 88.336292ms
+2025/12/27 14:46:27   ✅ Published 20 records to Kafka
+2025/12/27 14:46:27   Latest Close: $59.20 (Date: 2025-12-26)
+2025/12/27 14:46:27   Recent prices:
+2025/12/27 14:46:27     2025-11-28: Open=$62.61 High=$62.87 Low=$62.45 Close=$62.77 Volume=2034412
+2025/12/27 14:46:27     2025-12-01: Open=$62.70 High=$62.71 Low=$60.68 Close=$60.80 Volume=7124452
+2025/12/27 14:46:27     2025-12-02: Open=$60.98 High=$60.98 Low=$60.02 Close=$60.35 Volume=6108000
+2025/12/27 14:46:27     2025-12-03: Open=$60.51 High=$60.91 Low=$59.84 Close=$60.03 Volume=7941940
+2025/12/27 14:46:27     2025-12-04: Open=$60.05 High=$60.37 Low=$59.64 Close=$59.84 Volume=7389034
+2025/12/27 14:46:27     2025-12-05: Open=$58.99 High=$59.14 Low=$58.46 Close=$58.49 Volume=7138364
+2025/12/27 14:46:27     2025-12-08: Open=$58.60 High=$59.00 Low=$57.97 Close=$58.44 Volume=5414557
+2025/12/27 14:46:27     2025-12-09: Open=$58.75 High=$59.16 Low=$58.22 Close=$58.46 Volume=4455284
+2025/12/27 14:46:27     2025-12-10: Open=$58.40 High=$58.44 Low=$57.61 Close=$58.06 Volume=6792369
+2025/12/27 14:46:27     2025-12-11: Open=$58.01 High=$58.73 Low=$57.90 Close=$58.17 Volume=6554404
+2025/12/27 14:46:27     2025-12-12: Open=$58.25 High=$59.42 Low=$58.24 Close=$59.33 Volume=7601174
+2025/12/27 14:46:27     2025-12-15: Open=$59.43 High=$59.94 Low=$58.95 Close=$59.84 Volume=6858731
+2025/12/27 14:46:27     2025-12-16: Open=$59.81 High=$59.95 Low=$59.03 Close=$59.34 Volume=7027254
+2025/12/27 14:46:27     2025-12-17: Open=$59.42 High=$60.41 Low=$58.95 Close=$60.11 Volume=9188248
+2025/12/27 14:46:27     2025-12-18: Open=$60.38 High=$60.47 Low=$59.97 Close=$60.10 Volume=11093103
+2025/12/27 14:46:27     2025-12-19: Open=$60.29 High=$60.48 Low=$59.32 Close=$59.43 Volume=10159846
+2025/12/27 14:46:27     2025-12-22: Open=$58.48 High=$58.48 Low=$55.85 Close=$57.22 Volume=18834503
+2025/12/27 14:46:27     2025-12-23: Open=$56.99 High=$58.30 Low=$56.88 Close=$58.14 Volume=8862867
+2025/12/27 14:46:27     2025-12-24: Open=$58.13 High=$59.01 Low=$58.13 Close=$59.01 Volume=3079327
+2025/12/27 14:46:27     2025-12-26: Open=$58.84 High=$59.27 Low=$58.80 Close=$59.20 Volume=4342420
+2025/12/27 14:46:27 ⏱️  D processing time: 341.814834ms
+2025/12/27 14:46:27 
+[14/26] Processing VST...
+2025/12/27 14:46:27   ⏱️  Metadata fetch: 117.751875ms
+2025/12/27 14:46:27   Name: Vistra Corp
+2025/12/27 14:46:27   Exchange: NYSE
+2025/12/27 14:46:27   Type: 
+2025/12/27 14:46:27   Metadata:
+{
+    "ticker": "VST",
+    "name": "Vistra Corp",
+    "exchangeCode": "NYSE",
+    "assetType": "",
+    "startDate": "2016-10-04T00:00:00Z",
+    "endDate": "2025-12-26T00:00:00Z",
+    "description": "Vistra Energy is a premier, integrated, Fortune 350 energy company based in Irving, Texas, providing essential resources for customers, commerce, and communities. Vistra combines an innovative, customer-centric approach to retail with safe, reliable, diverse, and efficient power generation. The company brings its products and services to market in 20 states and the District of Columbia, including six of the seven competitive power markets in the U.S. and markets in Canada and Japan, as well. Serving nearly 5 million residential, commercial, and industrial retail customers with electricity and gas, Vistra is the largest competitive residential electricity provider in the country and offers over 40 renewable energy plans. The company is also the largest competitive power generator in the U.S. with a capacity of approximately 39,000 megawatts powered by a diverse portfolio of natural gas, nuclear, coal, solar, and battery energy storage facilities. In addition, the company is a large purchaser of wind power. The company is currently developing the largest battery storage system of its kind in the world – a 300-MW/1,200-MWh system in Moss Landing, California. Vistra is guided by four core principles: we do business the right way, we work as a team, we compete to win, and we care about our people, our neighbors, and our stakeholders."
+  }
+2025/12/27 14:46:27   ⏱️  Price fetch: 127.824375ms
+2025/12/27 14:46:27   Retrieved 20 price records
+2025/12/27 14:46:27   ⏱️  Kafka publish: 15.539292ms
+2025/12/27 14:46:27   ✅ Published 20 records to Kafka
+2025/12/27 14:46:27   Latest Close: $161.67 (Date: 2025-12-26)
+2025/12/27 14:46:27   Recent prices:
+2025/12/27 14:46:27     2025-11-28: Open=$179.00 High=$180.77 Low=$178.01 Close=$178.86 Volume=1908413
+2025/12/27 14:46:27     2025-12-01: Open=$176.01 High=$176.48 Low=$172.69 Close=$173.64 Volume=3250997
+2025/12/27 14:46:27     2025-12-02: Open=$175.40 High=$175.95 Low=$171.37 Close=$172.55 Volume=3029169
+2025/12/27 14:46:27     2025-12-03: Open=$172.66 High=$173.85 Low=$168.95 Close=$171.65 Volume=2492646
+2025/12/27 14:46:27     2025-12-04: Open=$171.90 High=$178.05 Low=$170.47 Close=$176.07 Volume=3408698
+2025/12/27 14:46:27     2025-12-05: Open=$176.52 High=$176.63 Low=$166.47 Close=$167.17 Volume=4524250
+2025/12/27 14:46:27     2025-12-08: Open=$167.82 High=$167.82 Low=$164.06 Close=$166.12 Volume=4190760
+2025/12/27 14:46:27     2025-12-09: Open=$165.37 High=$169.91 Low=$164.73 Close=$164.81 Volume=3916293
+2025/12/27 14:46:27     2025-12-10: Open=$165.34 High=$166.02 Low=$158.65 Close=$165.17 Volume=5778143
+2025/12/27 14:46:27     2025-12-11: Open=$162.05 High=$174.89 Low=$161.01 Close=$174.60 Volume=6197091
+2025/12/27 14:46:27     2025-12-12: Open=$175.20 High=$180.00 Low=$167.50 Close=$170.10 Volume=5870170
+2025/12/27 14:46:27     2025-12-15: Open=$172.96 High=$173.00 Low=$166.98 Close=$168.25 Volume=4287381
+2025/12/27 14:46:27     2025-12-16: Open=$166.65 High=$173.93 Low=$166.55 Close=$173.45 Volume=4190098
+2025/12/27 14:46:27     2025-12-17: Open=$174.01 High=$175.14 Low=$158.70 Close=$159.97 Volume=6902940
+2025/12/27 14:46:27     2025-12-18: Open=$165.66 High=$171.92 Low=$162.67 Close=$166.17 Volume=7652476
+2025/12/27 14:46:27     2025-12-19: Open=$166.70 High=$171.41 Low=$162.70 Close=$163.03 Volume=7141814
+2025/12/27 14:46:27     2025-12-22: Open=$164.00 High=$164.31 Low=$160.85 Close=$161.57 Volume=4379215
+2025/12/27 14:46:27     2025-12-23: Open=$161.57 High=$163.70 Low=$160.13 Close=$161.67 Volume=3771975
+2025/12/27 14:46:27     2025-12-24: Open=$160.99 High=$162.59 Low=$159.77 Close=$161.96 Volume=1342160
+2025/12/27 14:46:27     2025-12-26: Open=$161.67 High=$163.00 Low=$160.35 Close=$161.67 Volume=2317522
+2025/12/27 14:46:27 ⏱️  VST processing time: 261.83325ms
+2025/12/27 14:46:27 
+[15/26] Processing NRG...
+2025/12/27 14:46:27   ⏱️  Metadata fetch: 106.086792ms
+2025/12/27 14:46:27   Name: NRG Energy Inc
+2025/12/27 14:46:27   Exchange: NYSE
+2025/12/27 14:46:27   Type: 
+2025/12/27 14:46:27   Metadata:
+{
+    "ticker": "NRG",
+    "name": "NRG Energy Inc",
+    "exchangeCode": "NYSE",
+    "assetType": "",
+    "startDate": "2003-12-02T00:00:00Z",
+    "endDate": "2025-12-26T00:00:00Z",
+    "description": "NRG Energy is a leading energy and home services company powered by people and our passion for a smarter, cleaner, and more connected future. A Fortune 500 company operating in the United States and Canada, NRG delivers innovative solutions that help people, organizations, and businesses achieve their goals while also advocating for competitive energy markets and customer choice."
+  }
+2025/12/27 14:46:27   ⏱️  Price fetch: 132.674042ms
+2025/12/27 14:46:27   Retrieved 20 price records
+2025/12/27 14:46:27   ⏱️  Kafka publish: 15.857916ms
+2025/12/27 14:46:27   ✅ Published 20 records to Kafka
+2025/12/27 14:46:27   Latest Close: $160.88 (Date: 2025-12-26)
+2025/12/27 14:46:27   Recent prices:
+2025/12/27 14:46:27     2025-11-28: Open=$170.00 High=$171.77 Low=$168.41 Close=$169.49 Volume=944859
+2025/12/27 14:46:27     2025-12-01: Open=$167.55 High=$167.56 Low=$163.76 Close=$165.66 Volume=1276045
+2025/12/27 14:46:27     2025-12-02: Open=$166.94 High=$168.08 Low=$162.76 Close=$164.08 Volume=1444666
+2025/12/27 14:46:27     2025-12-03: Open=$163.76 High=$167.00 Low=$160.22 Close=$166.77 Volume=1291292
+2025/12/27 14:46:27     2025-12-04: Open=$166.14 High=$170.19 Low=$166.00 Close=$169.36 Volume=1366059
+2025/12/27 14:46:27     2025-12-05: Open=$168.87 High=$170.25 Low=$162.79 Close=$163.00 Volume=1864827
+2025/12/27 14:46:27     2025-12-08: Open=$164.19 High=$167.18 Low=$162.21 Close=$164.11 Volume=1355794
+2025/12/27 14:46:27     2025-12-09: Open=$165.41 High=$171.56 Low=$164.31 Close=$166.75 Volume=1588384
+2025/12/27 14:46:27     2025-12-10: Open=$167.43 High=$170.06 Low=$163.25 Close=$168.16 Volume=1636165
+2025/12/27 14:46:27     2025-12-11: Open=$165.02 High=$170.84 Low=$164.26 Close=$170.64 Volume=1558983
+2025/12/27 14:46:27     2025-12-12: Open=$172.00 High=$172.40 Low=$160.58 Close=$161.44 Volume=2018205
+2025/12/27 14:46:27     2025-12-15: Open=$161.89 High=$163.06 Low=$159.27 Close=$159.99 Volume=1674699
+2025/12/27 14:46:27     2025-12-16: Open=$159.62 High=$162.26 Low=$157.45 Close=$160.15 Volume=1535226
+2025/12/27 14:46:27     2025-12-17: Open=$160.54 High=$161.08 Low=$147.98 Close=$149.48 Volume=4748365
+2025/12/27 14:46:27     2025-12-18: Open=$154.29 High=$158.21 Low=$152.09 Close=$154.64 Volume=2218340
+2025/12/27 14:46:27     2025-12-19: Open=$154.86 High=$157.58 Low=$154.70 Close=$156.20 Volume=3893964
+2025/12/27 14:46:27     2025-12-22: Open=$158.10 High=$158.10 Low=$154.35 Close=$156.96 Volume=1267502
+2025/12/27 14:46:27     2025-12-23: Open=$156.93 High=$159.71 Low=$156.65 Close=$158.11 Volume=1297854
+2025/12/27 14:46:27     2025-12-24: Open=$157.87 High=$161.14 Low=$156.94 Close=$160.56 Volume=553362
+2025/12/27 14:46:27     2025-12-26: Open=$160.10 High=$161.52 Low=$158.39 Close=$160.88 Volume=1099575
+2025/12/27 14:46:27 ⏱️  NRG processing time: 254.922417ms
+2025/12/27 14:46:27 
+[16/26] Processing ETR...
+2025/12/27 14:46:28   ⏱️  Metadata fetch: 117.49775ms
+2025/12/27 14:46:28   Name: Entergy Corp
+2025/12/27 14:46:28   Exchange: NYSE
+2025/12/27 14:46:28   Type: 
+2025/12/27 14:46:28   Metadata:
+{
+    "ticker": "ETR",
+    "name": "Entergy Corp",
+    "exchangeCode": "NYSE",
+    "assetType": "",
+    "startDate": "1972-06-01T00:00:00Z",
+    "endDate": "2025-12-26T00:00:00Z",
+    "description": "Entergy Arkansas provides electricity to approximately 735,000 customers in 63 counties. Entergy Arkansas is a subsidiary of Entergy Corporation. Entergy produces, transmits and distributes electricity to power life for 3 million customers through our operating companies in Arkansas, Louisiana, Mississippi and Texas. We're investing for growth and improved reliability and resilience of our energy system while working to keep energy rates affordable for our customers. We're also investing in cleaner energy generation like modern natural gas, nuclear and renewable energy. A nationally recognized leader in sustainability and corporate citizenship, we deliver more than $100 million in economic benefits each year to the communities we serve through philanthropy, volunteerism and advocacy. Entergy is a Fortune 500 company headquartered in New Orleans, Louisiana, and has approximately 12,000 employees."
+  }
+2025/12/27 14:46:28   ⏱️  Price fetch: 124.202292ms
+2025/12/27 14:46:28   Retrieved 20 price records
+2025/12/27 14:46:28   ⏱️  Kafka publish: 64.746958ms
+2025/12/27 14:46:28   ✅ Published 20 records to Kafka
+2025/12/27 14:46:28   Latest Close: $92.85 (Date: 2025-12-26)
+2025/12/27 14:46:28   Recent prices:
+2025/12/27 14:46:28     2025-11-28: Open=$97.00 High=$97.66 Low=$96.66 Close=$97.52 Volume=928696
+2025/12/27 14:46:28     2025-12-01: Open=$96.67 High=$96.99 Low=$94.42 Close=$94.59 Volume=2295460
+2025/12/27 14:46:28     2025-12-02: Open=$95.07 High=$95.07 Low=$92.92 Close=$92.97 Volume=2029152
+2025/12/27 14:46:28     2025-12-03: Open=$93.25 High=$94.26 Low=$92.39 Close=$94.24 Volume=5825977
+2025/12/27 14:46:28     2025-12-04: Open=$93.96 High=$95.00 Low=$93.40 Close=$94.46 Volume=3742637
+2025/12/27 14:46:28     2025-12-05: Open=$93.93 High=$94.82 Low=$93.63 Close=$94.22 Volume=3317394
+2025/12/27 14:46:28     2025-12-08: Open=$94.17 High=$94.21 Low=$92.55 Close=$92.90 Volume=3216061
+2025/12/27 14:46:28     2025-12-09: Open=$93.23 High=$94.24 Low=$93.21 Close=$93.23 Volume=2848831
+2025/12/27 14:46:28     2025-12-10: Open=$93.23 High=$93.55 Low=$92.21 Close=$93.33 Volume=2248137
+2025/12/27 14:46:28     2025-12-11: Open=$92.98 High=$93.86 Low=$92.60 Close=$93.32 Volume=2504557
+2025/12/27 14:46:28     2025-12-12: Open=$93.36 High=$93.57 Low=$91.71 Close=$92.35 Volume=3197762
+2025/12/27 14:46:28     2025-12-15: Open=$92.13 High=$94.02 Low=$91.58 Close=$93.75 Volume=2499035
+2025/12/27 14:46:28     2025-12-16: Open=$93.44 High=$94.20 Low=$92.63 Close=$92.81 Volume=2113786
+2025/12/27 14:46:28     2025-12-17: Open=$92.97 High=$93.14 Low=$91.67 Close=$91.83 Volume=3647562
+2025/12/27 14:46:28     2025-12-18: Open=$92.49 High=$92.84 Low=$91.91 Close=$92.21 Volume=2821097
+2025/12/27 14:46:28     2025-12-19: Open=$92.51 High=$93.01 Low=$91.45 Close=$91.50 Volume=6062367
+2025/12/27 14:46:28     2025-12-22: Open=$91.79 High=$92.08 Low=$90.87 Close=$91.99 Volume=2144912
+2025/12/27 14:46:28     2025-12-23: Open=$92.06 High=$92.68 Low=$91.72 Close=$92.33 Volume=2550028
+2025/12/27 14:46:28     2025-12-24: Open=$92.28 High=$92.84 Low=$92.02 Close=$92.67 Volume=780235
+2025/12/27 14:46:28     2025-12-26: Open=$92.44 High=$92.97 Low=$92.05 Close=$92.85 Volume=1288789
+2025/12/27 14:46:28 ⏱️  ETR processing time: 306.806208ms
+2025/12/27 14:46:28 
+[17/26] Processing NEE...
+2025/12/27 14:46:28   ⏱️  Metadata fetch: 124.977417ms
+2025/12/27 14:46:28   Name: NextEra Energy Inc
+2025/12/27 14:46:28   Exchange: NYSE
+2025/12/27 14:46:28   Type: 
+2025/12/27 14:46:28   Metadata:
+{
+    "ticker": "NEE",
+    "name": "NextEra Energy Inc",
+    "exchangeCode": "NYSE",
+    "assetType": "",
+    "startDate": "1983-06-10T00:00:00Z",
+    "endDate": "2025-12-26T00:00:00Z",
+    "description": "NextEra Energy, Inc. is one of the largest electric power and energy infrastructure companies in North America and is a leading provider of electricity to American homes and businesses. Headquartered in Juno Beach, Florida, NextEra Energy is a Fortune 200 company that owns Florida Power \u0026 Light Company, America's largest electric utility, which provides reliable electricity to approximately 12 million people across Florida. NextEra Energy also owns one of the largest energy infrastructure development companies in the U.S., NextEra Energy Resources, LLC. NextEra Energy and its affiliated entities are meeting America's growing energy needs with a diverse mix of energy sources, including natural gas, nuclear, renewable energy and battery storage."
+  }
+2025/12/27 14:46:28   ⏱️  Price fetch: 132.349792ms
+2025/12/27 14:46:28   Retrieved 20 price records
+2025/12/27 14:46:28   ⏱️  Kafka publish: 14.536167ms
+2025/12/27 14:46:28   ✅ Published 20 records to Kafka
+2025/12/27 14:46:28   Latest Close: $80.41 (Date: 2025-12-26)
+2025/12/27 14:46:28   Recent prices:
+2025/12/27 14:46:28     2025-11-28: Open=$85.44 High=$86.47 Low=$85.15 Close=$86.29 Volume=4123323
+2025/12/27 14:46:28     2025-12-01: Open=$85.59 High=$85.67 Low=$84.39 Close=$84.65 Volume=7987007
+2025/12/27 14:46:28     2025-12-02: Open=$84.91 High=$85.28 Low=$84.25 Close=$84.58 Volume=7086954
+2025/12/27 14:46:28     2025-12-03: Open=$84.66 High=$85.97 Low=$84.50 Close=$84.95 Volume=9615114
+2025/12/27 14:46:28     2025-12-04: Open=$84.52 High=$84.81 Low=$82.74 Close=$83.39 Volume=12489644
+2025/12/27 14:46:28     2025-12-05: Open=$83.51 High=$84.19 Low=$83.06 Close=$83.13 Volume=8194564
+2025/12/27 14:46:28     2025-12-08: Open=$83.14 High=$83.16 Low=$80.41 Close=$80.55 Volume=17792150
+2025/12/27 14:46:28     2025-12-09: Open=$80.80 High=$81.14 Low=$79.50 Close=$79.64 Volume=13214188
+2025/12/27 14:46:28     2025-12-10: Open=$80.05 High=$81.92 Low=$79.64 Close=$81.27 Volume=13341138
+2025/12/27 14:46:28     2025-12-11: Open=$81.25 High=$82.41 Low=$81.06 Close=$81.21 Volume=9494052
+2025/12/27 14:46:28     2025-12-12: Open=$81.84 High=$82.27 Low=$81.33 Close=$81.65 Volume=7783135
+2025/12/27 14:46:28     2025-12-15: Open=$82.01 High=$82.24 Low=$80.53 Close=$81.65 Volume=9489842
+2025/12/27 14:46:28     2025-12-16: Open=$81.64 High=$81.85 Low=$80.19 Close=$81.32 Volume=6616573
+2025/12/27 14:46:28     2025-12-17: Open=$80.97 High=$81.31 Low=$79.65 Close=$80.29 Volume=10212040
+2025/12/27 14:46:28     2025-12-18: Open=$80.40 High=$81.17 Low=$80.00 Close=$80.85 Volume=9201309
+2025/12/27 14:46:28     2025-12-19: Open=$80.57 High=$81.14 Low=$79.53 Close=$79.54 Volume=30492276
+2025/12/27 14:46:28     2025-12-22: Open=$79.02 High=$80.18 Low=$78.72 Close=$80.04 Volume=7136210
+2025/12/27 14:46:28     2025-12-23: Open=$80.03 High=$80.70 Low=$79.75 Close=$79.79 Volume=7874966
+2025/12/27 14:46:28     2025-12-24: Open=$80.14 High=$80.47 Low=$79.69 Close=$80.45 Volume=3011338
+2025/12/27 14:46:28     2025-12-26: Open=$80.48 High=$80.64 Low=$80.05 Close=$80.41 Volume=3636427
+2025/12/27 14:46:28 ⏱️  NEE processing time: 272.113708ms
+2025/12/27 14:46:28 
+[18/26] Processing BEP...
+2025/12/27 14:46:28   ⏱️  Metadata fetch: 126.009125ms
+2025/12/27 14:46:28   Name: Brookfield Renewable Partners LP
+2025/12/27 14:46:28   Exchange: NYSE
+2025/12/27 14:46:28   Type: 
+2025/12/27 14:46:28   Metadata:
+{
+    "ticker": "BEP",
+    "name": "Brookfield Renewable Partners LP",
+    "exchangeCode": "NYSE",
+    "assetType": "",
+    "startDate": "2005-11-15T00:00:00Z",
+    "endDate": "2025-12-26T00:00:00Z",
+    "description": "Brookfield Renewable Energy Partners L.P. (Brookfield Renewable) is a renewable power platform. Its primarily hydroelectric generating portfolio includes 172 hydropower facilities and six wind farms, and totals approximately 5,000 megawatts of installed capacity, including projects under construction. Its portfolio is diversified across 67 river systems and 10 power markets in Canada, the United States and Brazil, and generates on average enough electricity from renewable resources to power two million homes annually. In November 2012, the Company acquired 378 MW hydroelectric portfolio from from Alcoa Power Generating Inc. In May 2013, WWE Equity Holdings Inc., an indirect wholly owned subsidiary of Brookfield Renewable Energy Partners L.P., completed its compulsory acquisition of Western Wind. On May 21, 2013, the Company acquired 84.065% interest in Western Wind Energy Corp."
+  }
+2025/12/27 14:46:28   ⏱️  Price fetch: 133.506667ms
+2025/12/27 14:46:28   Retrieved 20 price records
+2025/12/27 14:46:28   ⏱️  Kafka publish: 74.337916ms
+2025/12/27 14:46:28   ✅ Published 20 records to Kafka
+2025/12/27 14:46:28   Latest Close: $27.36 (Date: 2025-12-26)
+2025/12/27 14:46:28   Recent prices:
+2025/12/27 14:46:28     2025-11-28: Open=$28.60 High=$28.78 Low=$28.26 Close=$28.70 Volume=476807
+2025/12/27 14:46:28     2025-12-01: Open=$28.34 High=$28.39 Low=$27.75 Close=$28.07 Volume=576337
+2025/12/27 14:46:28     2025-12-02: Open=$28.13 High=$28.37 Low=$27.89 Close=$27.92 Volume=394510
+2025/12/27 14:46:28     2025-12-03: Open=$27.83 High=$27.96 Low=$27.57 Close=$27.88 Volume=775429
+2025/12/27 14:46:28     2025-12-04: Open=$27.68 High=$28.52 Low=$27.68 Close=$28.37 Volume=512022
+2025/12/27 14:46:28     2025-12-05: Open=$28.52 High=$28.61 Low=$28.34 Close=$28.37 Volume=345860
+2025/12/27 14:46:28     2025-12-08: Open=$28.58 High=$28.72 Low=$27.94 Close=$28.31 Volume=676687
+2025/12/27 14:46:28     2025-12-09: Open=$28.29 High=$28.58 Low=$28.12 Close=$28.19 Volume=325045
+2025/12/27 14:46:28     2025-12-10: Open=$28.10 High=$28.70 Low=$28.05 Close=$28.39 Volume=639580
+2025/12/27 14:46:28     2025-12-11: Open=$28.54 High=$28.59 Low=$27.96 Close=$28.05 Volume=620845
+2025/12/27 14:46:28     2025-12-12: Open=$28.36 High=$28.37 Low=$27.59 Close=$27.89 Volume=675734
+2025/12/27 14:46:28     2025-12-15: Open=$27.99 High=$28.06 Low=$27.66 Close=$27.66 Volume=508060
+2025/12/27 14:46:28     2025-12-16: Open=$27.55 High=$28.00 Low=$27.55 Close=$27.78 Volume=526981
+2025/12/27 14:46:28     2025-12-17: Open=$27.66 High=$27.95 Low=$26.58 Close=$26.70 Volume=1047910
+2025/12/27 14:46:28     2025-12-18: Open=$26.93 High=$27.24 Low=$26.67 Close=$26.67 Volume=644904
+2025/12/27 14:46:28     2025-12-19: Open=$26.30 High=$27.04 Low=$26.30 Close=$26.88 Volume=911659
+2025/12/27 14:46:28     2025-12-22: Open=$26.92 High=$27.52 Low=$26.90 Close=$27.30 Volume=393890
+2025/12/27 14:46:28     2025-12-23: Open=$26.80 High=$27.43 Low=$26.80 Close=$27.23 Volume=502500
+2025/12/27 14:46:28     2025-12-24: Open=$27.36 High=$27.50 Low=$27.24 Close=$27.43 Volume=141564
+2025/12/27 14:46:28     2025-12-26: Open=$27.21 High=$27.55 Low=$27.20 Close=$27.36 Volume=189369
+2025/12/27 14:46:28 ⏱️  BEP processing time: 334.193833ms
+2025/12/27 14:46:28 
+[19/26] Processing AES...
+2025/12/27 14:46:28   ⏱️  Metadata fetch: 121.282792ms
+2025/12/27 14:46:28   Name: AES Corp
+2025/12/27 14:46:28   Exchange: NYSE
+2025/12/27 14:46:28   Type: 
+2025/12/27 14:46:28   Metadata:
+{
+    "ticker": "AES",
+    "name": "AES Corp",
+    "exchangeCode": "NYSE",
+    "assetType": "",
+    "startDate": "1991-06-26T00:00:00Z",
+    "endDate": "2025-12-26T00:00:00Z",
+    "description": "The AES Corporation is a Fortune 500 global power company. We provide affordable, sustainable energy to 14 countries through our diverse portfolio of distribution businesses as well as thermal and renewable generation facilities. Our workforce is committed to operational excellence and meeting the world's changing power needs. Our 2019 revenues were $10 billion, and we own and manage $34 billion in total assets."
+  }
+2025/12/27 14:46:29   ⏱️  Price fetch: 136.334375ms
+2025/12/27 14:46:29   Retrieved 20 price records
+2025/12/27 14:46:29   ⏱️  Kafka publish: 42.936667ms
+2025/12/27 14:46:29   ✅ Published 20 records to Kafka
+2025/12/27 14:46:29   Latest Close: $14.07 (Date: 2025-12-26)
+2025/12/27 14:46:29   Recent prices:
+2025/12/27 14:46:29     2025-11-28: Open=$13.97 High=$14.08 Low=$13.91 Close=$14.06 Volume=2200723
+2025/12/27 14:46:29     2025-12-01: Open=$13.99 High=$14.06 Low=$13.85 Close=$13.99 Volume=7534557
+2025/12/27 14:46:29     2025-12-02: Open=$14.06 High=$14.14 Low=$13.94 Close=$13.96 Volume=4755737
+2025/12/27 14:46:29     2025-12-03: Open=$14.02 High=$14.11 Low=$13.70 Close=$13.71 Volume=8534495
+2025/12/27 14:46:29     2025-12-04: Open=$13.70 High=$14.04 Low=$13.70 Close=$13.93 Volume=10009205
+2025/12/27 14:46:29     2025-12-05: Open=$14.09 High=$14.17 Low=$13.89 Close=$13.92 Volume=5815847
+2025/12/27 14:46:29     2025-12-08: Open=$13.97 High=$14.11 Low=$13.82 Close=$13.86 Volume=4799582
+2025/12/27 14:46:29     2025-12-09: Open=$13.92 High=$14.20 Low=$13.88 Close=$13.96 Volume=7050759
+2025/12/27 14:46:29     2025-12-10: Open=$13.99 High=$14.10 Low=$13.75 Close=$13.80 Volume=11788026
+2025/12/27 14:46:29     2025-12-11: Open=$13.80 High=$14.12 Low=$13.65 Close=$14.00 Volume=7595512
+2025/12/27 14:46:29     2025-12-12: Open=$14.08 High=$14.12 Low=$13.76 Close=$13.83 Volume=7114502
+2025/12/27 14:46:29     2025-12-15: Open=$13.82 High=$13.90 Low=$13.65 Close=$13.86 Volume=7835220
+2025/12/27 14:46:29     2025-12-16: Open=$13.85 High=$13.85 Low=$13.52 Close=$13.62 Volume=5183533
+2025/12/27 14:46:29     2025-12-17: Open=$13.67 High=$13.76 Low=$13.36 Close=$13.48 Volume=6537223
+2025/12/27 14:46:29     2025-12-18: Open=$13.60 High=$13.74 Low=$13.54 Close=$13.68 Volume=6758548
+2025/12/27 14:46:29     2025-12-19: Open=$13.72 High=$13.88 Low=$13.50 Close=$13.53 Volume=11204125
+2025/12/27 14:46:29     2025-12-22: Open=$13.58 High=$13.88 Low=$13.52 Close=$13.86 Volume=7903864
+2025/12/27 14:46:29     2025-12-23: Open=$13.92 High=$14.02 Low=$13.80 Close=$13.90 Volume=4812515
+2025/12/27 14:46:29     2025-12-24: Open=$13.87 High=$13.99 Low=$13.82 Close=$13.96 Volume=2488315
+2025/12/27 14:46:29     2025-12-26: Open=$14.01 High=$14.08 Low=$13.92 Close=$14.07 Volume=3090572
+2025/12/27 14:46:29 ⏱️  AES processing time: 300.935125ms
+2025/12/27 14:46:29 
+[20/26] Processing CWEN...
+2025/12/27 14:46:29   ⏱️  Metadata fetch: 106.706667ms
+2025/12/27 14:46:29   Name: Clearway Energy Inc - Class C
+2025/12/27 14:46:29   Exchange: NYSE
+2025/12/27 14:46:29   Type: 
+2025/12/27 14:46:29   Metadata:
+{
+    "ticker": "CWEN",
+    "name": "Clearway Energy Inc - Class C",
+    "exchangeCode": "NYSE",
+    "assetType": "",
+    "startDate": "2013-07-17T00:00:00Z",
+    "endDate": "2025-12-26T00:00:00Z",
+    "description": "Clearway Energy, Inc. is one of the largest owners of clean energy generation assets in the US and is leading the transition to a world powered by clean energy. Our portfolio comprises approximately 11.7 GW of gross capacity in 26 states, including 9 GW of wind, solar, and battery energy storage and over 2.7 GW of conventional dispatchable power capacity providing critical grid reliability services. Through our diversified and primarily contracted clean energy portfolio, Clearway Energy endeavors to provide our investors with stable and growing dividend income. Clearway Energy, Inc.’s Class C and Class A common stock are traded on the New York Stock Exchange under the symbols CWEN and CWEN.A, respectively. Clearway Energy, Inc. is sponsored by our controlling investor, Clearway Energy Group LLC."
+  }
+2025/12/27 14:46:29   ⏱️  Price fetch: 124.260459ms
+2025/12/27 14:46:29   Retrieved 20 price records
+2025/12/27 14:46:29   ⏱️  Kafka publish: 82.600625ms
+2025/12/27 14:46:29   ✅ Published 20 records to Kafka
+2025/12/27 14:46:29   Latest Close: $33.18 (Date: 2025-12-26)
+2025/12/27 14:46:29   Recent prices:
+2025/12/27 14:46:29     2025-11-28: Open=$36.42 High=$36.68 Low=$36.33 Close=$36.62 Volume=467000
+2025/12/27 14:46:29     2025-12-01: Open=$35.83 High=$36.05 Low=$34.69 Close=$35.20 Volume=941825
+2025/12/27 14:46:29     2025-12-02: Open=$35.53 High=$35.66 Low=$34.89 Close=$35.05 Volume=760274
+2025/12/27 14:46:29     2025-12-03: Open=$35.25 High=$35.25 Low=$34.39 Close=$34.46 Volume=756542
+2025/12/27 14:46:29     2025-12-04: Open=$34.44 High=$34.71 Low=$34.11 Close=$34.15 Volume=852479
+2025/12/27 14:46:29     2025-12-05: Open=$34.07 High=$34.22 Low=$33.71 Close=$34.01 Volume=767287
+2025/12/27 14:46:29     2025-12-08: Open=$34.15 High=$34.15 Low=$32.90 Close=$33.01 Volume=824772
+2025/12/27 14:46:29     2025-12-09: Open=$32.89 High=$33.50 Low=$32.77 Close=$32.97 Volume=802984
+2025/12/27 14:46:29     2025-12-10: Open=$33.02 High=$33.20 Low=$32.77 Close=$32.77 Volume=1052742
+2025/12/27 14:46:29     2025-12-11: Open=$32.98 High=$33.00 Low=$32.61 Close=$32.66 Volume=736000
+2025/12/27 14:46:29     2025-12-12: Open=$32.80 High=$32.96 Low=$32.40 Close=$32.41 Volume=1058583
+2025/12/27 14:46:29     2025-12-15: Open=$32.55 High=$32.84 Low=$32.30 Close=$32.71 Volume=844294
+2025/12/27 14:46:29     2025-12-16: Open=$32.65 High=$32.98 Low=$32.22 Close=$32.38 Volume=839426
+2025/12/27 14:46:29     2025-12-17: Open=$32.88 High=$32.88 Low=$31.93 Close=$32.59 Volume=1008818
+2025/12/27 14:46:29     2025-12-18: Open=$32.80 High=$32.95 Low=$32.34 Close=$32.42 Volume=766078
+2025/12/27 14:46:29     2025-12-19: Open=$32.45 High=$32.73 Low=$32.41 Close=$32.64 Volume=3342208
+2025/12/27 14:46:29     2025-12-22: Open=$32.79 High=$33.78 Low=$32.65 Close=$33.46 Volume=938763
+2025/12/27 14:46:29     2025-12-23: Open=$33.61 High=$33.83 Low=$33.27 Close=$33.40 Volume=824162
+2025/12/27 14:46:29     2025-12-24: Open=$33.60 High=$33.60 Low=$32.93 Close=$33.38 Volume=354880
+2025/12/27 14:46:29     2025-12-26: Open=$33.31 High=$33.34 Low=$33.06 Close=$33.18 Volume=672816
+2025/12/27 14:46:29 ⏱️  CWEN processing time: 313.987ms
+2025/12/27 14:46:29 
+[21/26] Processing PWR...
+2025/12/27 14:46:29   ⏱️  Metadata fetch: 128.959333ms
+2025/12/27 14:46:29   Name: Quanta Services Inc
+2025/12/27 14:46:29   Exchange: NYSE
+2025/12/27 14:46:29   Type: 
+2025/12/27 14:46:29   Metadata:
+{
+    "ticker": "PWR",
+    "name": "Quanta Services Inc",
+    "exchangeCode": "NYSE",
+    "assetType": "",
+    "startDate": "1998-02-12T00:00:00Z",
+    "endDate": "2025-12-26T00:00:00Z",
+    "description": "Quanta is an industry leader in providing specialized infrastructure solutions to the utility, renewable energy, technology, communications, pipeline and energy industries. Quanta's comprehensive services include designing, installing, repairing and maintaining energy and communications infrastructure. With operations throughout the United States, Canada, Australia and select other international markets, Quanta has the manpower, resources and expertise to safely complete projects that are local, regional, national or international in scope."
+  }
+2025/12/27 14:46:29   ⏱️  Price fetch: 120.266125ms
+2025/12/27 14:46:29   Retrieved 20 price records
+2025/12/27 14:46:29   ⏱️  Kafka publish: 63.320916ms
+2025/12/27 14:46:29   ✅ Published 20 records to Kafka
+2025/12/27 14:46:29   Latest Close: $432.67 (Date: 2025-12-26)
+2025/12/27 14:46:29   Recent prices:
+2025/12/27 14:46:29     2025-11-28: Open=$463.47 High=$466.25 Low=$458.60 Close=$464.88 Volume=409487
+2025/12/27 14:46:29     2025-12-01: Open=$457.30 High=$459.79 Low=$449.26 Close=$452.23 Volume=842763
+2025/12/27 14:46:29     2025-12-02: Open=$458.02 High=$459.00 Low=$447.94 Close=$454.72 Volume=831657
+2025/12/27 14:46:29     2025-12-03: Open=$454.51 High=$458.35 Low=$440.90 Close=$456.02 Volume=734687
+2025/12/27 14:46:29     2025-12-04: Open=$454.65 High=$467.09 Low=$450.00 Close=$464.84 Volume=942953
+2025/12/27 14:46:29     2025-12-05: Open=$464.84 High=$465.42 Low=$456.56 Close=$460.64 Volume=728790
+2025/12/27 14:46:29     2025-12-08: Open=$471.11 High=$473.99 Low=$460.34 Close=$463.09 Volume=827766
+2025/12/27 14:46:29     2025-12-09: Open=$460.50 High=$465.45 Low=$457.44 Close=$457.96 Volume=733254
+2025/12/27 14:46:29     2025-12-10: Open=$460.17 High=$469.52 Low=$452.15 Close=$462.21 Volume=1057797
+2025/12/27 14:46:29     2025-12-11: Open=$460.00 High=$467.86 Low=$450.26 Close=$466.91 Volume=716719
+2025/12/27 14:46:29     2025-12-12: Open=$464.85 High=$465.49 Low=$431.56 Close=$438.11 Volume=1497126
+2025/12/27 14:46:29     2025-12-15: Open=$436.54 High=$443.85 Low=$433.30 Close=$435.87 Volume=1564743
+2025/12/27 14:46:29     2025-12-16: Open=$435.36 High=$440.46 Low=$430.81 Close=$438.49 Volume=988038
+2025/12/27 14:46:29     2025-12-17: Open=$436.48 High=$441.41 Low=$412.59 Close=$414.25 Volume=1556777
+2025/12/27 14:46:29     2025-12-18: Open=$427.00 High=$427.46 Low=$419.03 Close=$421.31 Volume=1099297
+2025/12/27 14:46:29     2025-12-19: Open=$422.21 High=$431.99 Low=$421.45 Close=$426.66 Volume=1602472
+2025/12/27 14:46:29     2025-12-22: Open=$433.11 High=$435.40 Low=$428.51 Close=$433.03 Volume=772944
+2025/12/27 14:46:29     2025-12-23: Open=$431.94 High=$437.40 Low=$431.00 Close=$435.20 Volume=562590
+2025/12/27 14:46:29     2025-12-24: Open=$434.73 High=$434.80 Low=$430.63 Close=$433.58 Volume=306389
+2025/12/27 14:46:29     2025-12-26: Open=$433.00 High=$433.58 Low=$429.68 Close=$432.67 Volume=279242
+2025/12/27 14:46:29 ⏱️  PWR processing time: 312.907458ms
+2025/12/27 14:46:29 
+[22/26] Processing FLNC...
+2025/12/27 14:46:29   ⏱️  Metadata fetch: 116.350083ms
+2025/12/27 14:46:29   Name: Fluence Energy Inc - Class A
+2025/12/27 14:46:29   Exchange: NASDAQ
+2025/12/27 14:46:29   Type: 
+2025/12/27 14:46:29   Metadata:
+{
+    "ticker": "FLNC",
+    "name": "Fluence Energy Inc - Class A",
+    "exchangeCode": "NASDAQ",
+    "assetType": "",
+    "startDate": "2021-10-28T00:00:00Z",
+    "endDate": "2025-12-26T00:00:00Z",
+    "description": "Fluence Energy Inc - Class A"
+  }
+2025/12/27 14:46:30   ⏱️  Price fetch: 128.491166ms
+2025/12/27 14:46:30   Retrieved 20 price records
+2025/12/27 14:46:30   ⏱️  Kafka publish: 62.557292ms
+2025/12/27 14:46:30   ✅ Published 20 records to Kafka
+2025/12/27 14:46:30   Latest Close: $20.21 (Date: 2025-12-26)
+2025/12/27 14:46:30   Recent prices:
+2025/12/27 14:46:30     2025-11-28: Open=$19.01 High=$19.99 Low=$18.70 Close=$19.64 Volume=3411001
+2025/12/27 14:46:30     2025-12-01: Open=$19.05 High=$19.97 Low=$18.52 Close=$19.39 Volume=4878144
+2025/12/27 14:46:30     2025-12-02: Open=$19.20 High=$20.27 Low=$18.91 Close=$19.96 Volume=5690058
+2025/12/27 14:46:30     2025-12-03: Open=$20.09 High=$20.15 Low=$19.11 Close=$19.85 Volume=4496905
+2025/12/27 14:46:30     2025-12-04: Open=$20.11 High=$23.48 Low=$19.84 Close=$23.34 Volume=10286028
+2025/12/27 14:46:30     2025-12-05: Open=$22.51 High=$24.79 Low=$22.51 Close=$23.96 Volume=7800373
+2025/12/27 14:46:30     2025-12-08: Open=$22.58 High=$23.67 Low=$21.83 Close=$22.86 Volume=6198643
+2025/12/27 14:46:30     2025-12-09: Open=$22.61 High=$24.33 Low=$21.83 Close=$23.94 Volume=5599538
+2025/12/27 14:46:30     2025-12-10: Open=$23.90 High=$24.41 Low=$22.54 Close=$23.81 Volume=3994289
+2025/12/27 14:46:30     2025-12-11: Open=$23.49 High=$25.81 Low=$22.25 Close=$25.79 Volume=7086125
+2025/12/27 14:46:30     2025-12-12: Open=$25.44 High=$25.85 Low=$22.01 Close=$22.19 Volume=7057839
+2025/12/27 14:46:30     2025-12-15: Open=$22.61 High=$22.68 Low=$21.36 Close=$21.52 Volume=4325016
+2025/12/27 14:46:30     2025-12-16: Open=$20.81 High=$21.37 Low=$18.52 Close=$21.31 Volume=6081443
+2025/12/27 14:46:30     2025-12-17: Open=$21.71 High=$21.72 Low=$18.48 Close=$18.57 Volume=4994266
+2025/12/27 14:46:30     2025-12-18: Open=$20.48 High=$20.82 Low=$19.00 Close=$19.31 Volume=4414443
+2025/12/27 14:46:30     2025-12-19: Open=$18.96 High=$20.25 Low=$18.91 Close=$19.96 Volume=6804147
+2025/12/27 14:46:30     2025-12-22: Open=$20.34 High=$20.95 Low=$19.54 Close=$20.45 Volume=4106770
+2025/12/27 14:46:30     2025-12-23: Open=$19.84 High=$21.15 Low=$19.42 Close=$19.67 Volume=4026636
+2025/12/27 14:46:30     2025-12-24: Open=$19.70 High=$20.00 Low=$19.22 Close=$19.83 Volume=1517776
+2025/12/27 14:46:30     2025-12-26: Open=$19.83 High=$20.59 Low=$19.11 Close=$20.21 Volume=2538556
+2025/12/27 14:46:30 ⏱️  FLNC processing time: 307.791708ms
+2025/12/27 14:46:30 
+[23/26] Processing ETN...
+2025/12/27 14:46:30   ⏱️  Metadata fetch: 126.906167ms
+2025/12/27 14:46:30   Name: Eaton Corporation plc
+2025/12/27 14:46:30   Exchange: NYSE
+2025/12/27 14:46:30   Type: 
+2025/12/27 14:46:30   Metadata:
+{
+    "ticker": "ETN",
+    "name": "Eaton Corporation plc",
+    "exchangeCode": "NYSE",
+    "assetType": "",
+    "startDate": "1972-06-01T00:00:00Z",
+    "endDate": "2025-12-26T00:00:00Z",
+    "description": "Eaton is an intelligent power management company dedicated to protecting the environment and improving the quality of life for people everywhere. We make products for the data center, utility, industrial, commercial, machine building, residential, aerospace and mobility markets. We are guided by our commitment to do business right, to operate sustainably and to help our customers manage power ─ today and well into the future. By capitalizing on the global growth trends of electrification and digitalization, we're helping to solve the world's most urgent power management challenges and building a more sustainable society for people today and generations to come. Founded in 1911, Eaton has continuously evolved to meet the changing and expanding needs of our stakeholders. With revenues of nearly $25 billion in 2024, the company serves customers in more than 160 countries."
+  }
+2025/12/27 14:46:30   ⏱️  Price fetch: 124.229417ms
+2025/12/27 14:46:30   Retrieved 20 price records
+2025/12/27 14:46:30   ⏱️  Kafka publish: 49.166625ms
+2025/12/27 14:46:30   ✅ Published 20 records to Kafka
+2025/12/27 14:46:30   Latest Close: $322.17 (Date: 2025-12-26)
+2025/12/27 14:46:30   Recent prices:
+2025/12/27 14:46:30     2025-11-28: Open=$344.40 High=$347.89 Low=$341.64 Close=$345.89 Volume=935120
+2025/12/27 14:46:30     2025-12-01: Open=$342.65 High=$343.89 Low=$338.40 Close=$339.71 Volume=2248798
+2025/12/27 14:46:30     2025-12-02: Open=$343.50 High=$343.78 Low=$332.88 Close=$333.11 Volume=3850288
+2025/12/27 14:46:30     2025-12-03: Open=$330.50 High=$336.20 Low=$323.57 Close=$335.57 Volume=3079383
+2025/12/27 14:46:30     2025-12-04: Open=$335.48 High=$340.90 Low=$332.50 Close=$338.93 Volume=2351829
+2025/12/27 14:46:30     2025-12-05: Open=$338.89 High=$341.42 Low=$336.00 Close=$337.66 Volume=1845606
+2025/12/27 14:46:30     2025-12-08: Open=$337.45 High=$345.69 Low=$336.13 Close=$343.39 Volume=3615360
+2025/12/27 14:46:30     2025-12-09: Open=$344.09 High=$348.64 Low=$341.55 Close=$341.76 Volume=2072693
+2025/12/27 14:46:30     2025-12-10: Open=$343.87 High=$354.37 Low=$342.21 Close=$353.45 Volume=2554134
+2025/12/27 14:46:30     2025-12-11: Open=$350.51 High=$351.14 Low=$341.56 Close=$350.36 Volume=2405623
+2025/12/27 14:46:30     2025-12-12: Open=$349.17 High=$349.98 Low=$329.40 Close=$331.98 Volume=3921907
+2025/12/27 14:46:30     2025-12-15: Open=$334.50 High=$336.04 Low=$331.72 Close=$333.21 Volume=2568954
+2025/12/27 14:46:30     2025-12-16: Open=$333.21 High=$334.31 Low=$326.71 Close=$329.93 Volume=2527409
+2025/12/27 14:46:30     2025-12-17: Open=$329.25 High=$331.12 Low=$311.92 Close=$315.82 Volume=7694386
+2025/12/27 14:46:30     2025-12-18: Open=$322.04 High=$323.08 Low=$314.00 Close=$315.95 Volume=3826602
+2025/12/27 14:46:30     2025-12-19: Open=$315.68 High=$320.71 Low=$315.45 Close=$317.80 Volume=7357343
+2025/12/27 14:46:30     2025-12-22: Open=$322.61 High=$322.77 Low=$318.27 Close=$320.39 Volume=2080366
+2025/12/27 14:46:30     2025-12-23: Open=$319.66 High=$324.20 Low=$319.19 Close=$322.81 Volume=2197116
+2025/12/27 14:46:30     2025-12-24: Open=$323.42 High=$324.07 Low=$321.15 Close=$323.67 Volume=766455
+2025/12/27 14:46:30     2025-12-26: Open=$323.28 High=$323.53 Low=$321.32 Close=$322.17 Volume=1100854
+2025/12/27 14:46:30 ⏱️  ETN processing time: 300.693334ms
+2025/12/27 14:46:30 
+[24/26] Processing BWXT...
+2025/12/27 14:46:30   ⏱️  Metadata fetch: 122.468083ms
+2025/12/27 14:46:30   Name: BWX Technologies Inc
+2025/12/27 14:46:30   Exchange: NYSE
+2025/12/27 14:46:30   Type: 
+2025/12/27 14:46:30   Metadata:
+{
+    "ticker": "BWXT",
+    "name": "BWX Technologies Inc",
+    "exchangeCode": "NYSE",
+    "assetType": "",
+    "startDate": "2010-08-02T00:00:00Z",
+    "endDate": "2025-12-26T00:00:00Z",
+    "description": "BWX Technologies, Inc. engages in government, commercial nuclear, and technical services businesses. The company operates in three segments: Nuclear Operations Group, Technical Services Group, and Nuclear Energy. The Nuclear Operations Group segment designs and manufactures critical components and nuclear fuel for the United States naval fleet; and delivers technologies for application in the nuclear industry. The Technical Services Group segment manages and operates government-owned and related facilities for defense programs, nuclear non-proliferation, and advanced technology development. This segment also engages in the decommissioning, decontamination, and clean-up of legacy radiological and hazardous waste. The Nuclear Energy segment designs and fabricates components and systems for commercial nuclear power industry; provides related maintenance services to plants; and focuses on commercial nuclear power technologies. The company was formerly known as The Babcock \u0026 Wilcox Company and changed its name to BWX Technologies, Inc. in June 2015. BWX Technologies, Inc. was founded in 1867 and is headquartered in Lynchburg, Virginia."
+  }
+2025/12/27 14:46:30   ⏱️  Price fetch: 130.273917ms
+2025/12/27 14:46:30   Retrieved 20 price records
+2025/12/27 14:46:30   ⏱️  Kafka publish: 54.193333ms
+2025/12/27 14:46:30   ✅ Published 20 records to Kafka
+2025/12/27 14:46:30   Latest Close: $175.88 (Date: 2025-12-26)
+2025/12/27 14:46:30   Recent prices:
+2025/12/27 14:46:30     2025-11-28: Open=$179.90 High=$180.00 Low=$177.56 Close=$178.88 Volume=373083
+2025/12/27 14:46:30     2025-12-01: Open=$176.52 High=$176.97 Low=$174.28 Close=$174.93 Volume=675681
+2025/12/27 14:46:30     2025-12-02: Open=$178.26 High=$179.20 Low=$175.62 Close=$176.20 Volume=781451
+2025/12/27 14:46:30     2025-12-03: Open=$175.66 High=$175.66 Low=$171.69 Close=$174.71 Volume=825092
+2025/12/27 14:46:30     2025-12-04: Open=$175.00 High=$182.50 Low=$174.07 Close=$178.33 Volume=1537476
+2025/12/27 14:46:30     2025-12-05: Open=$181.00 High=$181.48 Low=$174.87 Close=$177.87 Volume=813542
+2025/12/27 14:46:30     2025-12-08: Open=$178.97 High=$180.38 Low=$176.20 Close=$178.75 Volume=551282
+2025/12/27 14:46:30     2025-12-09: Open=$177.97 High=$180.00 Low=$177.11 Close=$177.16 Volume=696774
+2025/12/27 14:46:30     2025-12-10: Open=$176.65 High=$182.00 Low=$174.00 Close=$179.65 Volume=1657793
+2025/12/27 14:46:30     2025-12-11: Open=$178.94 High=$183.94 Low=$172.25 Close=$183.38 Volume=1811432
+2025/12/27 14:46:30     2025-12-12: Open=$183.57 High=$183.75 Low=$174.12 Close=$175.03 Volume=1842778
+2025/12/27 14:46:30     2025-12-15: Open=$176.57 High=$176.91 Low=$170.05 Close=$174.37 Volume=1210719
+2025/12/27 14:46:30     2025-12-16: Open=$173.06 High=$174.89 Low=$171.28 Close=$173.20 Volume=803694
+2025/12/27 14:46:30     2025-12-17: Open=$173.20 High=$174.00 Low=$167.03 Close=$168.12 Volume=940327
+2025/12/27 14:46:30     2025-12-18: Open=$172.78 High=$173.71 Low=$169.86 Close=$170.75 Volume=949422
+2025/12/27 14:46:30     2025-12-19: Open=$170.89 High=$176.88 Low=$170.74 Close=$176.43 Volume=1665039
+2025/12/27 14:46:30     2025-12-22: Open=$179.85 High=$180.00 Low=$177.70 Close=$178.41 Volume=653408
+2025/12/27 14:46:30     2025-12-23: Open=$177.91 High=$181.01 Low=$177.04 Close=$177.62 Volume=759441
+2025/12/27 14:46:30     2025-12-24: Open=$178.20 High=$178.20 Low=$176.42 Close=$177.18 Volume=257386
+2025/12/27 14:46:30     2025-12-26: Open=$177.31 High=$177.60 Low=$174.80 Close=$175.88 Volume=425698
+2025/12/27 14:46:30 ⏱️  BWXT processing time: 307.360584ms
+2025/12/27 14:46:30 
+[25/26] Processing SMR...
+2025/12/27 14:46:30   ⏱️  Metadata fetch: 119.183667ms
+2025/12/27 14:46:30   Name: NuScale Power Corporation - Class A
+2025/12/27 14:46:30   Exchange: NYSE
+2025/12/27 14:46:30   Type: 
+2025/12/27 14:46:30   Metadata:
+{
+    "ticker": "SMR",
+    "name": "NuScale Power Corporation - Class A",
+    "exchangeCode": "NYSE",
+    "assetType": "",
+    "startDate": "2020-12-09T00:00:00Z",
+    "endDate": "2025-12-26T00:00:00Z",
+    "description": "Spring Valley Acquisition Corp - Class A"
+  }
+2025/12/27 14:46:30   ⏱️  Price fetch: 130.456875ms
+2025/12/27 14:46:30   Retrieved 20 price records
+2025/12/27 14:46:30   ⏱️  Kafka publish: 65.137834ms
+2025/12/27 14:46:30   ✅ Published 20 records to Kafka
+2025/12/27 14:46:30   Latest Close: $14.85 (Date: 2025-12-26)
+2025/12/27 14:46:30   Recent prices:
+2025/12/27 14:46:30     2025-11-28: Open=$19.42 High=$20.29 Low=$19.08 Close=$20.00 Volume=17890345
+2025/12/27 14:46:30     2025-12-01: Open=$19.28 High=$19.33 Low=$18.05 Close=$18.08 Volume=20612033
+2025/12/27 14:46:30     2025-12-02: Open=$18.46 High=$19.65 Low=$18.41 Close=$18.91 Volume=19300246
+2025/12/27 14:46:30     2025-12-03: Open=$18.75 High=$20.32 Low=$18.21 Close=$20.14 Volume=25902829
+2025/12/27 14:46:30     2025-12-04: Open=$20.01 High=$23.35 Low=$19.50 Close=$22.85 Volume=42614593
+2025/12/27 14:46:30     2025-12-05: Open=$22.34 High=$22.42 Low=$21.30 Close=$21.39 Volume=25834745
+2025/12/27 14:46:30     2025-12-08: Open=$22.35 High=$22.96 Low=$20.86 Close=$21.56 Volume=24123050
+2025/12/27 14:46:30     2025-12-09: Open=$20.90 High=$21.95 Low=$20.62 Close=$21.32 Volume=16127567
+2025/12/27 14:46:30     2025-12-10: Open=$20.62 High=$21.11 Low=$19.77 Close=$20.32 Volume=22478954
+2025/12/27 14:46:30     2025-12-11: Open=$19.87 High=$21.26 Low=$18.81 Close=$21.22 Volume=22399137
+2025/12/27 14:46:30     2025-12-12: Open=$20.84 High=$20.90 Low=$18.33 Close=$18.34 Volume=28676997
+2025/12/27 14:46:30     2025-12-15: Open=$18.68 High=$18.71 Low=$17.37 Close=$17.41 Volume=21888169
+2025/12/27 14:46:30     2025-12-16: Open=$17.11 High=$17.60 Low=$16.61 Close=$17.12 Volume=20564571
+2025/12/27 14:46:30     2025-12-17: Open=$17.08 High=$17.25 Low=$15.69 Close=$15.73 Volume=22147156
+2025/12/27 14:46:30     2025-12-18: Open=$16.48 High=$16.83 Low=$15.65 Close=$15.79 Volume=19272151
+2025/12/27 14:46:30     2025-12-19: Open=$15.99 High=$16.61 Low=$15.94 Close=$16.07 Volume=28175629
+2025/12/27 14:46:30     2025-12-22: Open=$16.54 High=$17.25 Low=$16.16 Close=$16.43 Volume=24591899
+2025/12/27 14:46:30     2025-12-23: Open=$16.15 High=$16.31 Low=$15.77 Close=$15.97 Volume=17835342
+2025/12/27 14:46:30     2025-12-24: Open=$15.96 High=$16.13 Low=$15.53 Close=$16.08 Volume=10249595
+2025/12/27 14:46:30     2025-12-26: Open=$15.89 High=$15.89 Low=$14.76 Close=$14.85 Volume=24899604
+2025/12/27 14:46:30 ⏱️  SMR processing time: 315.012958ms
+2025/12/27 14:46:30 
+[26/26] Processing OKLO...
+2025/12/27 14:46:31   ⏱️  Metadata fetch: 130.555542ms
+2025/12/27 14:46:31   Name: Oklo Inc
+2025/12/27 14:46:31   Exchange: NYSE
+2025/12/27 14:46:31   Type: 
+2025/12/27 14:46:31   Metadata:
+{
+    "ticker": "OKLO",
+    "name": "Oklo Inc",
+    "exchangeCode": "NYSE",
+    "assetType": "",
+    "startDate": "2021-07-08T00:00:00Z",
+    "endDate": "2025-12-26T00:00:00Z",
+    "description": "AltC Acquisition Corp - Class A"
+  }
+2025/12/27 14:46:31   ⏱️  Price fetch: 132.38425ms
+2025/12/27 14:46:31   Retrieved 20 price records
+2025/12/27 14:46:31   ⏱️  Kafka publish: 37.53875ms
+2025/12/27 14:46:31   ✅ Published 20 records to Kafka
+2025/12/27 14:46:31   Latest Close: $76.92 (Date: 2025-12-26)
+2025/12/27 14:46:31   Recent prices:
+2025/12/27 14:46:31     2025-11-28: Open=$90.00 High=$94.51 Low=$89.01 Close=$91.38 Volume=5692883
+2025/12/27 14:46:31     2025-12-01: Open=$88.54 High=$90.60 Low=$85.50 Close=$87.36 Volume=6719904
+2025/12/27 14:46:31     2025-12-02: Open=$88.98 High=$96.50 Low=$88.60 Close=$91.84 Volume=10924072
+2025/12/27 14:46:31     2025-12-03: Open=$90.99 High=$97.00 Low=$89.01 Close=$96.59 Volume=7980992
+2025/12/27 14:46:31     2025-12-04: Open=$96.98 High=$114.29 Low=$94.61 Close=$111.65 Volume=21446867
+2025/12/27 14:46:31     2025-12-05: Open=$105.98 High=$107.59 Low=$100.51 Close=$104.67 Volume=14573818
+2025/12/27 14:46:31     2025-12-08: Open=$108.14 High=$109.17 Low=$100.60 Close=$104.61 Volume=9366403
+2025/12/27 14:46:31     2025-12-09: Open=$103.61 High=$107.55 Low=$101.92 Close=$103.93 Volume=6651334
+2025/12/27 14:46:31     2025-12-10: Open=$102.90 High=$104.57 Low=$98.32 Close=$100.60 Volume=9298347
+2025/12/27 14:46:31     2025-12-11: Open=$98.49 High=$103.42 Low=$94.41 Close=$103.00 Volume=8523475
+2025/12/27 14:46:31     2025-12-12: Open=$102.70 High=$103.14 Low=$87.34 Close=$87.42 Volume=15776200
+2025/12/27 14:46:31     2025-12-15: Open=$89.35 High=$89.60 Low=$82.00 Close=$82.33 Volume=9772428
+2025/12/27 14:46:31     2025-12-16: Open=$80.75 High=$84.24 Low=$78.67 Close=$83.51 Volume=7743388
+2025/12/27 14:46:31     2025-12-17: Open=$84.29 High=$85.58 Low=$75.00 Close=$75.94 Volume=10675565
+2025/12/27 14:46:31     2025-12-18: Open=$80.50 High=$81.00 Low=$76.07 Close=$77.72 Volume=9410224
+2025/12/27 14:46:31     2025-12-19: Open=$78.70 High=$85.26 Low=$78.53 Close=$83.23 Volume=11396329
+2025/12/27 14:46:31     2025-12-22: Open=$85.78 High=$85.83 Low=$80.14 Close=$83.44 Volume=11057593
+2025/12/27 14:46:31     2025-12-23: Open=$81.81 High=$84.95 Low=$80.79 Close=$81.88 Volume=6598108
+2025/12/27 14:46:31     2025-12-24: Open=$80.49 High=$81.31 Low=$78.64 Close=$81.31 Volume=5203726
+2025/12/27 14:46:31     2025-12-26: Open=$80.03 High=$80.35 Low=$76.16 Close=$76.92 Volume=7122962
+2025/12/27 14:46:31 ⏱️  OKLO processing time: 300.935917ms
+2025/12/27 14:46:31 
+✅ Publishing complete!
+2025/12/27 14:46:31   Success: 26
+2025/12/27 14:46:31   Errors: 0
+2025/12/27 14:46:31 ⏱️  Total processing time: 7.838020125s
+2025/12/27 14:46:31 
+📊 Producer Statistics:
+2025/12/27 14:46:31   Messages: 25
+2025/12/27 14:46:31   Bytes: 77583
+2025/12/27 14:46:31   Errors: 0
+
+✅ Operation completed successfully!

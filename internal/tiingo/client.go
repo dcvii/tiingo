@@ -9,7 +9,7 @@ import (
 	"sync/atomic"
 	"time"
 
-	"github.com/mdcb/tiingo-tracker/pkg/models"
+	"github.com/dcvii/tiingo/pkg/models"
 	"golang.org/x/time/rate"
 )
 

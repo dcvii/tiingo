@@ -5,7 +5,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/mdcb/tiingo-tracker/pkg/models"
+	"github.com/dcvii/tiingo/pkg/models"
 )
 
 // TestStockTickerFormat verifies that stock tickers are processed without format conversion

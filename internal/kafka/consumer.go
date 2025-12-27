@@ -7,8 +7,8 @@ import (
 	"log"
 	"time"
 
-	"github.com/mdcb/tiingo-tracker/internal/database"
-	"github.com/mdcb/tiingo-tracker/pkg/models"
+	"github.com/dcvii/tiingo/internal/database"
+	"github.com/dcvii/tiingo/pkg/models"
 	"github.com/segmentio/kafka-go"
 )
 
@@ -37,7 +37,7 @@ func NewConsumer(config *Config, db *database.Manager, logger *log.Logger) (*Con
 		MinBytes:       10e3, // 10KB
 		MaxBytes:       10e6, // 10MB
 		CommitInterval: time.Second,
-		StartOffset:    kafka.LastOffset, // Start from latest by default
+		StartOffset:    kafka.FirstOffset, // Start from beginning for new consumer groups
 		MaxWait:        500 * time.Millisecond,
 	})
 
@@ -57,6 +57,12 @@ func NewConsumer(config *Config, db *database.Manager, logger *log.Logger) (*Con
 func (c *Consumer) Start(ctx context.Context) error {
 	c.logger.Printf("Starting Kafka consumer for topic: %s (group: %s)", c.config.Topic, c.config.ConsumerGroup)
 
+	var (
+		consecutiveErrors int
+		maxRetries        = 3
+		baseBackoff       = time.Second
+	)
+
 	for {
 		select {
 		case <-ctx.Done():
@@ -73,15 +79,39 @@ func (c *Consumer) Start(ctx context.Context) error {
 				continue
 			}
 
-			if err := c.processMessage(ctx, msg); err != nil {
-				c.logger.Printf("Error processing message (offset=%d): %v", msg.Offset, err)
-				// Don't commit on error - message will be reprocessed
-				continue
+			// Process message with retry logic
+			var processErr error
+			for attempt := 0; attempt <= maxRetries; attempt++ {
+				if attempt > 0 {
+					backoff := baseBackoff * time.Duration(1<<uint(attempt-1)) // Exponential backoff
+					c.logger.Printf("Retrying message processing (attempt %d/%d) after %v", attempt, maxRetries, backoff)
+					time.Sleep(backoff)
+				}
+
+				processErr = c.processMessage(ctx, msg)
+				if processErr == nil {
+					consecutiveErrors = 0
+					break
+				}
+
+				c.logger.Printf("Error processing message (offset=%d, attempt=%d/%d): %v", msg.Offset, attempt+1, maxRetries+1, processErr)
 			}
 
-			// Commit offset after successful processing
+			// If still failed after retries, log and skip to avoid blocking
+			if processErr != nil {
+				c.logger.Printf("Failed to process message after %d attempts (offset=%d), skipping: %v", maxRetries+1, msg.Offset, processErr)
+				consecutiveErrors++
+
+				// If too many consecutive errors, something may be wrong with the consumer
+				if consecutiveErrors >= 10 {
+					return fmt.Errorf("too many consecutive processing errors (%d), stopping consumer", consecutiveErrors)
+				}
+			}
+
+			// Commit offset after processing (success or permanent failure)
 			if err := c.reader.CommitMessages(ctx, msg); err != nil {
-				c.logger.Printf("Error committing offset: %v", err)
+				c.logger.Printf("Error committing offset (will retry on next message): %v", err)
+				// Don't return error here - Kafka will retry commit on next message
 			}
 		}
 	}
