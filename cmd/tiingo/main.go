@@ -10,9 +10,9 @@ import (
 	"strings"
 	"time"
 
-	"github.com/mdcb/tiingo-tracker/internal/kafka"
-	"github.com/mdcb/tiingo-tracker/internal/portfolio"
-	"github.com/mdcb/tiingo-tracker/internal/tiingo"
+	"github.com/dcvii/tiingo/internal/kafka"
+	"github.com/dcvii/tiingo/internal/portfolio"
+	"github.com/dcvii/tiingo/internal/tiingo"
 )
 
 func main() {

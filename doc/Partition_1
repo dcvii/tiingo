@@ -1,0 +1,18 @@
+Partition: 1
+Offset: 10
+Timestamp: CREATE_TIME 2025-11-28T15:45:38.972Z
+Key schema type: none
+Key schema ID: none
+Value schema type: none
+Value schema ID: none
+Key size: 4
+Value size: 3251
+
+Headers: 
+<no headers>
+
+Key: 
+OKLO
+
+Value: 
+{"message_id":"d62c6ceb-0582-41ed-b5bd-362919340db3","ticker":"OKLO","asset_type":"","fetch_time":"2025-11-28T07:45:38.972661-08:00","start_date":"2025-10-29T07:45:38.864299-07:00","end_date":"2025-11-28T07:45:38.864299-08:00","prices":[{"date":"2025-10-29T00:00:00Z","open":134.53,"high":152.06,"low":131.91,"close":143.42,"volume":18754515,"adjClose":143.42,"adjVolume":18754515},{"date":"2025-10-30T00:00:00Z","open":137.18,"high":145.3,"low":133.71,"close":137.39,"volume":12172001,"adjClose":137.39,"adjVolume":12172001},{"date":"2025-10-31T00:00:00Z","open":140.58,"high":141.7,"low":130.11,"close":132.77,"volume":11430664,"adjClose":132.77,"adjVolume":11430664},{"date":"2025-11-03T00:00:00Z","open":132.11,"high":132.11,"low":121.601,"close":126.67,"volume":10537401,"adjClose":126.67,"adjVolume":10537401},{"date":"2025-11-04T00:00:00Z","open":119.25,"high":122.3667,"low":111.79,"close":112.23,"volume":12094973,"adjClose":112.23,"adjVolume":12094973},{"date":"2025-11-05T00:00:00Z","open":116.37,"high":123.44,"low":114.3206,"close":121.23,"volume":12408838,"adjClose":121.23,"adjVolume":12408838},{"date":"2025-11-06T00:00:00Z","open":120.12,"high":120.95,"low":105.99,"close":106.75,"volume":15789580,"adjClose":106.75,"adjVolume":15789580},{"date":"2025-11-07T00:00:00Z","open":100,"high":112.7,"low":97.06,"close":112.65,"volume":16397464,"adjClose":112.65,"adjVolume":16397464},{"date":"2025-11-10T00:00:00Z","open":116.99,"high":117.44,"low":107.5,"close":111.52,"volume":12942669,"adjClose":111.52,"adjVolume":12942669},{"date":"2025-11-11T00:00:00Z","open":108.19,"high":111,"low":103.64,"close":104.22,"volume":11727574,"adjClose":104.22,"adjVolume":11727574},{"date":"2025-11-12T00:00:00Z","open":108.6,"high":116.98,"low":106.96,"close":111.17,"volume":19309483,"adjClose":111.17,"adjVolume":19309483},{"date":"2025-11-13T00:00:00Z","open":109.45,"high":110.38,"low":100.3,"close":101.64,"volume":12663825,"adjClose":101.64,"adjVolume":12663825},{"date":"2025-11-14T00:00:00Z","open":94.835,"high":106.83,"low":93.49,"close":97.57,"volume":15534236,"adjClose":97.57,"adjVolume":15534236},{"date":"2025-11-17T00:00:00Z","open":96.61,"high":101.5,"low":92.63,"close":95.36,"volume":10696967,"adjClose":95.36,"adjVolume":10696967},{"date":"2025-11-18T00:00:00Z","open":93.69,"high":100.5451,"low":93.15,"close":96.63,"volume":11402431,"adjClose":96.63,"adjVolume":11402431},{"date":"2025-11-19T00:00:00Z","open":99.65,"high":105.88,"low":98.05,"close":102.86,"volume":15765211,"adjClose":102.86,"adjVolume":15765211},{"date":"2025-11-20T00:00:00Z","open":106.11,"high":109.7,"low":87.75,"close":88,"volume":20149231,"adjClose":88,"adjVolume":20149231},{"date":"2025-11-21T00:00:00Z","open":89.45,"high":89.9254,"low":79.01,"close":88.17,"volume":21721938,"adjClose":88.17,"adjVolume":21721938},{"date":"2025-11-24T00:00:00Z","open":89.16,"high":93.2,"low":86.57,"close":89.55,"volume":24669569,"adjClose":89.55,"adjVolume":24669569},{"date":"2025-11-25T00:00:00Z","open":89.465,"high":89.47,"low":81.11,"close":85.77,"volume":12502878,"adjClose":85.77,"adjVolume":12502878},{"date":"2025-11-26T00:00:00Z","open":88.05,"high":89.88,"low":85.77,"close":88.72,"volume":8016281,"adjClose":88.72,"adjVolume":8016281}],"record_count":21}
