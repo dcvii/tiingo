@@ -131,7 +131,25 @@ run_producer() {
 run_consumer() {
     echo "🚀 Running Tiingo Consumer..."
     # Run consumer with timeout (30 seconds should be enough for most portfolios)
-    timeout 30s "$CONSUMER_BIN" \
+    # Use gtimeout on macOS (from coreutils), fallback to timeout on Linux
+    local timeout_cmd="timeout"
+    if command -v gtimeout >/dev/null 2>&1; then
+        timeout_cmd="gtimeout"
+    elif ! command -v timeout >/dev/null 2>&1; then
+        echo "⚠️  No timeout command available, running consumer without timeout"
+        "$CONSUMER_BIN" \
+            -db "$DB_PATH" \
+            -brokers "$BROKERS" \
+            -topic "$TOPIC" \
+            -group "$CONSUMER_GROUP" \
+            $VERBOSE || {
+                echo "❌ Consumer failed"
+                exit 1
+            }
+        return
+    fi
+    
+    $timeout_cmd 30s "$CONSUMER_BIN" \
         -db "$DB_PATH" \
         -brokers "$BROKERS" \
         -topic "$TOPIC" \

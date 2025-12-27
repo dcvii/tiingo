@@ -1,2 +1,25 @@
 🚀 Running Tiingo Consumer...
-❌ Consumer failed
+2025/12/27 15:07:36 Starting Tiingo Kafka Consumer
+2025/12/27 15:07:36 Database: portfolio.duckdb
+2025/12/27 15:07:36 Brokers: gold:9092
+2025/12/27 15:07:36 Topic: tiingo.daily_prices
+2025/12/27 15:07:36 Consumer Group: tiingo-db-writer
+2025/12/27 15:07:36 ✅ Database initialized
+2025/12/27 15:07:36 ✅ Kafka consumer initialized
+2025/12/27 15:07:36 🚀 Consumer started. Listening on topic: tiingo.daily_prices
+2025/12/27 15:07:36 Press Ctrl+C to stop...
+2025/12/27 15:07:36 Starting Kafka consumer for topic: tiingo.daily_prices (group: tiingo-db-writer)
+2025/12/27 15:07:47 Error fetching message: EOF
+2025/12/27 15:08:04 Error fetching message: EOF
+2025/12/27 15:08:06 
+Received signal: terminated
+2025/12/27 15:08:06 Shutting down gracefully...
+
+📊 Consumer Statistics:
+  Messages: 0
+  Bytes: 0
+  Errors: 6
+2025/12/27 15:08:06 ✅ Consumer stopped
+✅ Consumer completed (timed out after processing messages)
+
+✅ Operation completed successfully!
