@@ -47,6 +47,9 @@ tiingo/
 ├── portfolio.duckdb            # DuckDB database file
 ├── README.md                   # This file
 ├── KAFKA.md                    # Kafka architecture documentation
+├── tiingo-n8n                  # N8N producer binary
+├── consumer-n8n                # N8N consumer binary
+├── tiingo-n8n-wrapper.sh       # N8N automation wrapper script
 ├── cmd/
 │   ├── tiingo/
 │   │   ├── main.go            # Producer - fetches API data to Kafka
@@ -179,7 +182,33 @@ BTC
 
 ### Running the Application
 
-#### Option 1: Kafka Architecture (Recommended)
+#### Option 1: N8N Wrapper (Automation-Friendly)
+
+For automated workflows and N8N integrations, use the wrapper script:
+
+**Run both producer and consumer**:
+```bash
+./tiingo-n8n-wrapper.sh both --verbose
+```
+
+**Run producer only** (fetch to Kafka):
+```bash
+./tiingo-n8n-wrapper.sh producer --verbose
+```
+
+**Run consumer only** (Kafka to DB):
+```bash
+./tiingo-n8n-wrapper.sh consumer --verbose
+```
+
+The wrapper script:
+- Validates prerequisites (binaries, API key)
+- Manages both producer and consumer execution
+- Handles consumer timeout automatically (30s default)
+- Provides clean exit codes for automation
+- Supports all command-line options
+
+#### Option 2: Kafka Architecture (Manual)
 
 **Terminal 1** - Start the consumer (database writer):
 ```bash
@@ -193,7 +222,7 @@ BTC
 
 The producer fetches data from Tiingo API and publishes to Kafka. The consumer reads from Kafka and persists to DuckDB.
 
-#### Option 2: Direct Mode (Legacy)
+#### Option 3: Direct Mode (Legacy)
 
 **Basic sync** (direct API to database, bypassing Kafka):
 ```bash
@@ -395,6 +424,40 @@ COPY (
 
 ## Automation
 
+### N8N Integration
+
+The `tiingo-n8n-wrapper.sh` script is designed for easy integration with N8N workflows:
+
+**N8N Execute Command Node**:
+```bash
+# Command
+cd /Users/mdcb/devcode/PFIN/tiingo && ./tiingo-n8n-wrapper.sh both --verbose
+
+# Environment
+TIINGO_API_KEY: {{$credentials.tiingo.apiKey}}
+```
+
+**Wrapper Features**:
+- Pre-built binaries (`tiingo-n8n`, `consumer-n8n`) for consistent execution
+- Automatic timeout handling (30 seconds for consumer)
+- Clean exit codes for workflow error handling
+- Comprehensive error messages
+- Support for custom portfolios, brokers, topics, and database paths
+
+**Wrapper Options**:
+```bash
+# Show all options
+./tiingo-n8n-wrapper.sh --help
+
+# Custom configuration
+./tiingo-n8n-wrapper.sh both \
+  --portfolio data/custom.txt \
+  --brokers gold:9092 \
+  --topic tiingo.prices \
+  --db custom.duckdb \
+  --verbose
+```
+
 ### Daily Sync with Kafka Pipeline
 
 #### Option 1: Systemd Services (Linux)
@@ -456,7 +519,15 @@ sudo systemctl start tiingo-consumer.service
 sudo systemctl start tiingo-producer.timer
 ```
 
-#### Option 2: Cron (Legacy Direct Mode)
+#### Option 2: Cron with N8N Wrapper
+
+Add to crontab (`crontab -e`):
+```bash
+# Run at 4:30 PM PT (after market close) using N8N wrapper
+30 16 * * 1-5 cd /Users/mdcb/devcode/PFIN/tiingo && ./tiingo-n8n-wrapper.sh both >> logs/sync.log 2>&1
+```
+
+#### Option 3: Cron (Legacy Direct Mode)
 
 Add to crontab (`crontab -e`):
 ```bash
@@ -464,7 +535,50 @@ Add to crontab (`crontab -e`):
 30 16 * * 1-5 cd /Users/mdcb/devcode/PFIN/tiingo && ./tiingo -direct >> logs/sync.log 2>&1
 ```
 
-#### Option 3: macOS launchd
+#### Option 4: macOS launchd with N8N Wrapper
+
+**Single Scheduled Job** (`~/Library/LaunchAgents/com.mdcb.tiingo.n8n.plist`):
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>com.mdcb.tiingo.n8n</string>
+    <key>ProgramArguments</key>
+    <array>
+        <string>/Users/mdcb/devcode/PFIN/tiingo/tiingo-n8n-wrapper.sh</string>
+        <string>both</string>
+        <string>--verbose</string>
+    </array>
+    <key>StartCalendarInterval</key>
+    <dict>
+        <key>Hour</key>
+        <integer>16</integer>
+        <key>Minute</key>
+        <integer>30</integer>
+    </dict>
+    <key>WorkingDirectory</key>
+    <string>/Users/mdcb/devcode/PFIN/tiingo</string>
+    <key>EnvironmentVariables</key>
+    <dict>
+        <key>TIINGO_API_KEY</key>
+        <string>your_api_key_here</string>
+    </dict>
+    <key>StandardOutPath</key>
+    <string>/Users/mdcb/devcode/PFIN/tiingo/logs/n8n.log</string>
+    <key>StandardErrorPath</key>
+    <string>/Users/mdcb/devcode/PFIN/tiingo/logs/n8n-error.log</string>
+</dict>
+</plist>
+```
+
+Load the agent:
+```bash
+launchctl load ~/Library/LaunchAgents/com.mdcb.tiingo.n8n.plist
+```
+
+#### Option 5: macOS launchd (Manual Producer/Consumer)
 
 **Consumer Daemon** (`~/Library/LaunchAgents/com.mdcb.tiingo.consumer.plist`):
 ```xml
